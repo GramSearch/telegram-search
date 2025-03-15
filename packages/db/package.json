@@ -32,12 +32,12 @@
     "drizzle-kit": "^0.30.5",
     "drizzle-orm": "^0.40.0",
     "glob": "^11.0.1",
-    "pg": "^8.13.3",
+    "pg": "^8.14.0",
     "postgres": "^3.4.5",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/node": "^22.13.9",
+    "@types/node": "^22.13.10",
     "@types/pg": "^8.11.11",
     "tsx": "^4.19.3",
     "unbuild": "^3.5.0",
