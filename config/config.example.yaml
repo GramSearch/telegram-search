@@ -58,5 +58,6 @@ api:
     model: text-embedding-3-small
     # API key for provider
     apiKey: your_openai_api_key
+    dimensions: 1536
     # Optional, for custom API providers
     apiBase: 'https://api.openai.com/v1'

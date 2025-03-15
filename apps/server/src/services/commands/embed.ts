@@ -4,7 +4,7 @@ import type { EmbedDetails } from '../../types/apis/embed'
 
 import { useLogger } from '@tg-search/common'
 import { EmbeddingService } from '@tg-search/core'
-import { findMessagesByChatId, updateMessageEmbeddings } from '@tg-search/db'
+import { findMessageMissingEmbed, updateMessageEmbeddings, useEmbeddingTable } from '@tg-search/db'
 import { z } from 'zod'
 
 const logger = useLogger()
@@ -48,6 +48,7 @@ export class EmbedCommandHandler {
 
     // Initialize embedding service
     const embedding = new EmbeddingService()
+    await useEmbeddingTable(chatId, embedding.getEmbeddingConfig())
     const command: EmbedCommand = {
       id: crypto.randomUUID(),
       type: 'sync',
@@ -65,9 +66,8 @@ export class EmbedCommandHandler {
 
     try {
       // Get all messages for the chat
-      const messages = await findMessagesByChatId(chatId)
-      const messagesToEmbed = messages.items.filter(m => !m.embedding && m.content)
-      const totalMessages = messagesToEmbed.length
+      const messages = await findMessageMissingEmbed(chatId, embedding.getEmbeddingConfig())
+      const totalMessages = messages.length
       const totalBatches = Math.ceil(totalMessages / batchSize)
 
       command.metadata.totalMessages = totalMessages
@@ -83,29 +83,33 @@ export class EmbedCommandHandler {
       let failedBatches = 0
 
       // Split messages into batches
-      for (let i = 0; i < messagesToEmbed.length; i += batchSize) {
+      for (let i = 0; i < messages.length; i += batchSize) {
         const currentBatch = Math.floor(i / batchSize) + 1
         command.metadata.currentBatch = currentBatch
 
-        const batch = messagesToEmbed.slice(i, i + batchSize)
+        const batch = messages.slice(i, i + batchSize)
         logger.debug(`Processing batch ${currentBatch}/${totalBatches} (${batch.length} messages)`)
 
         try {
           // Generate embeddings in parallel
-          const contents = batch.map(m => m.content!)
+          const contents = batch
+            .filter(m => m.content)
+            .map(m => m.content as string)
           const embeddings = await embedding.generateEmbeddings(contents)
 
           // Prepare updates
-          const updates = batch.map((message, index) => ({
-            id: message.id,
-            embedding: embeddings[index],
-          }))
+          const updates = batch
+            .filter(message => message.uuid)
+            .map((message, index) => ({
+              id: message.uuid!,
+              embedding: embeddings[index],
+            }))
 
           // Update embeddings in batches with concurrency control
           for (let j = 0; j < updates.length; j += concurrency) {
             const concurrentBatch = updates.slice(j, j + concurrency)
             try {
-              await updateMessageEmbeddings(chatId, concurrentBatch)
+              await updateMessageEmbeddings(chatId, concurrentBatch, embedding.getEmbeddingConfig())
               totalProcessed += concurrentBatch.length
               command.metadata.processedMessages = totalProcessed
             }

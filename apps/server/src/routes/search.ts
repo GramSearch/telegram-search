@@ -23,7 +23,6 @@ export function setupSearchRoutes(app: App) {
     const validatedBody = searchCommandSchema.parse(body)
 
     logger.withFields(validatedBody).debug('Search request received')
-
     return createSSEResponse(async (controller) => {
       await commandManager.executeCommand('search', null, validatedBody, controller)
     })
