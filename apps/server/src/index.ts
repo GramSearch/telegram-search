@@ -14,6 +14,7 @@ import {
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
+import { setupWsRoutes } from './app'
 import { setupChatRoutes } from './routes/chat'
 import { setupCommandRoutes } from './routes/commands'
 import { setupConfigRoutes } from './routes/config'
@@ -23,7 +24,8 @@ import { setupUserInfoRoutes } from './routes/user-info'
 import { setupWsAuthRoutes } from './routes/ws-auth'
 import { createErrorResponse } from './utils/response'
 
-export * from './types'
+export type * from './types'
+export type * from './v2'
 
 // Core initialization
 async function initCore(): Promise<ReturnType<typeof useLogger>> {
@@ -118,6 +120,9 @@ function configureServer(logger: ReturnType<typeof useLogger>) {
 
   // Setup routes
   setupRoutes(app)
+
+  // v2 ws routes
+  setupWsRoutes(app)
 
   return app
 }
