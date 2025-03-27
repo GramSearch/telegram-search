@@ -202,13 +202,45 @@ export class ExportService {
     let count = 0
     let failedCount = 0
     let messages: TelegramMessage[] = []
+    logger.debug(`history ${JSON.stringify(history)}`)
 
-    const total = limit || history.count - 1 || 100
+    // 计算预期的消息总数
+    let expectedTotal: number
+    if (limit) {
+      expectedTotal = limit
+    }
+    else if (incremental && startId && exportMaxId) {
+      // 增量导出时，计算ID范围内的消息数量
+      expectedTotal = exportMaxId - startId
+      logger.debug('增量导出预期消息数', {
+        startId,
+        exportMaxId,
+        expectedTotal,
+        method,
+      })
+    }
+    else {
+      // 全量导出时使用历史记录总数
+      expectedTotal = history.count || 100
+      logger.debug('全量导出预期消息数', {
+        historyCount: history.count,
+        expectedTotal,
+        method,
+      })
+    }
+
     function isSkipMedia(type: DatabaseMessageType) {
       return !messageTypes.includes(type)
     }
-    if (incremental && exportMaxId && (exportMaxId - 1) === startId) {
-      onProgress?.(100, '无需导出', {
+
+    // 检查是否需要导出
+    if (incremental && exportMaxId && startId && (exportMaxId - 1) <= startId) {
+      logger.debug('无需导出，当前消息已是最新', {
+        startId,
+        exportMaxId,
+        method,
+      })
+      onProgress?.(100, '无需导出，当前消息已是最新', {
         chatId,
         format,
         path: exportPath,
@@ -227,17 +259,18 @@ export class ExportService {
       })
       return { count: 0, failedCount: 0 }
     }
+
     try {
       // Try to export messages
-      for await (const message of this.client.getMessages(chatId, undefined, {
+      for await (const message of this.client.getMessages(chatId, expectedTotal, {
         skipMedia: isSkipMedia('photo') || isSkipMedia('video') || isSkipMedia('document') || isSkipMedia('sticker'),
         startTime,
         endTime,
         limit,
         messageTypes,
         method,
-        minId: startId, // 使用增量导出的起始ID
-        maxId: exportMaxId, // 使用传入的最大ID限制
+        minId: startId,
+        maxId: exportMaxId,
       })) {
         // 在获取第一条消息时记录日志
         if (count === 0) {
@@ -246,6 +279,7 @@ export class ExportService {
             messageType: message.type,
             createdAt: message.createdAt,
             minIdUsed: startId,
+            method,
           })
         }
 
@@ -259,7 +293,7 @@ export class ExportService {
           messages = []
 
           // Report progress
-          const progress = Math.min(95, Math.floor((count / total) * 90) + 5)
+          const progress = Math.min(95, Math.floor((count / expectedTotal) * 90) + 5)
           onProgress?.(progress, `已处理 ${count} 条消息`, {
             chatId,
             format,
@@ -273,7 +307,7 @@ export class ExportService {
             limit,
             batchSize,
             method,
-            totalMessages: incremental ? count : total,
+            totalMessages: expectedTotal,
             processedMessages: count,
             failedMessages: failedCount > 0 ? failedCount : undefined,
           })
@@ -337,7 +371,7 @@ export class ExportService {
         limit,
         batchSize,
         method,
-        totalMessages: incremental ? count : total,
+        totalMessages: expectedTotal,
         processedMessages: count,
         failedMessages: failedCount > 0 ? failedCount : undefined,
       })
@@ -365,7 +399,7 @@ export class ExportService {
             limit,
             batchSize,
             method,
-            totalMessages: incremental ? count : total,
+            totalMessages: expectedTotal,
             processedMessages: count,
             failedMessages: failedCount > 0 ? failedCount : undefined,
           })
@@ -381,8 +415,8 @@ export class ExportService {
             type: 'waiting',
             waitSeconds,
             resumeTime: new Date(Date.now() + waitSeconds * 1000).toISOString(),
-            remainingCount: total - count,
-            totalMessages: incremental ? count : total,
+            remainingCount: expectedTotal - count,
+            totalMessages: expectedTotal,
             processedMessages: count,
             failedMessages: failedCount > 0 ? failedCount : undefined,
           })

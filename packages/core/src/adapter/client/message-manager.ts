@@ -58,14 +58,33 @@ export class MessageManager {
     let offsetId = 0
     let hasMore = true
     let processedCount = 0
+    const batchSize = 100 // 每次请求的固定数量
+    let lastBatchSize = 0
 
     try {
       while (hasMore) {
+        // 计算本次请求的实际限制数量
+        const requestLimit = Math.min(
+          batchSize,
+          limit ? limit - processedCount : batchSize,
+        )
+
+        this.logger.debug('获取普通消息', {
+          offsetId,
+          minId: options?.minId,
+          maxId: options?.maxId,
+          processedCount,
+          limit,
+          requestLimit,
+          lastBatchSize,
+        })
+
         // Get messages using normal API with retry
         const apiResponse = await this.errorHandler.withRetry(
           () => this.client.getMessages(chatId, {
-            limit: limit || 100,
+            limit: requestLimit,
             offsetId,
+            addOffset: 0, // 添加 addOffset 参数，与 takeout 模式保持一致
             minId: options?.minId || 0,
             maxId: options?.maxId || 0,
           }),
@@ -82,11 +101,27 @@ export class MessageManager {
         }
 
         const messages = apiResponse.data
+        lastBatchSize = messages.length
 
-        // If we got fewer messages than requested, there are no more
-        hasMore = messages.length === (limit || 100)
+        // 如果没有获取到消息，或者获取到的消息数量小于请求数量，说明没有更多消息了
+        if (messages.length === 0 || messages.length < requestLimit) {
+          hasMore = false
+        }
 
+        let batchProcessedCount = 0 // 记录这一批次处理的消息数量
         for (const message of messages) {
+          // 更新下一次请求的 offsetId
+          offsetId = message.id
+
+          // 检查是否达到边界条件
+          if (options?.maxId && message.id >= options.maxId) {
+            continue
+          }
+          if (options?.minId && message.id <= options.minId) {
+            hasMore = false
+            break
+          }
+
           // Skip empty messages
           if (message instanceof Api.MessageEmpty) {
             continue
@@ -95,7 +130,8 @@ export class MessageManager {
           // Check time range
           const messageTime = new Date(message.date * 1000)
           if (options?.startTime && messageTime < options.startTime) {
-            continue
+            hasMore = false
+            break
           }
           if (options?.endTime && messageTime > options.endTime) {
             continue
@@ -120,19 +156,28 @@ export class MessageManager {
 
             yield converted
             processedCount++
-
-            // Update offsetId to current message ID
-            offsetId = message.id
+            batchProcessedCount++
 
             // Check if we've reached the limit
-            if (options?.limit && processedCount >= options.limit) {
-              return
+            if (limit && processedCount >= limit) {
+              hasMore = false
+              break
             }
           }
           catch (error) {
             // Log error but continue with next message
             this.errorHandler.handleError(this.toError(error), '转换消息', `处理消息 ${message.id} 时出错，跳过该消息`)
           }
+        }
+
+        // 如果这批次的消息都被过滤掉了，但还有更多消息，继续获取
+        if (batchProcessedCount === 0 && hasMore && lastBatchSize > 0) {
+          this.logger.debug('当前批次所有消息都被过滤，继续获取下一批', {
+            offsetId,
+            lastBatchSize,
+            processedCount,
+          })
+          continue
         }
       }
     }

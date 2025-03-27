@@ -192,7 +192,9 @@ export class TakeoutManager {
     let offsetId = 0
     let hasMore = true
     let processedCount = 0
-    let hash: bigint = BigInt(0)
+    let hash: number = 0
+    let lastBatchSize = 0
+    const batchSize = 100 // 每次请求的消息数量
 
     try {
       // Initialize takeout session
@@ -202,24 +204,36 @@ export class TakeoutManager {
       }
 
       while (hasMore) {
+        // 计算本次请求的实际限制数量
+        const requestLimit = Math.min(batchSize, limit - processedCount)
+
         // https://core.telegram.org/api/offsets
-        const id = BigInt(chatId)
-        hash = hash ^ (hash >> 21n)
-        hash = hash ^ (hash << 35n)
-        hash = hash ^ (hash >> 4n)
+        const id = (chatId)
+        hash = hash ^ (hash >> 21)
+        hash = hash ^ (hash << 35)
+        hash = hash ^ (hash >> 4)
         hash = hash + id
-        this.logger.debug(`get takeout message ${options?.minId}-${options?.maxId}`)
+
+        this.logger.debug('获取takeout消息', {
+          offsetId,
+          minId: options?.minId,
+          maxId: options?.maxId,
+          processedCount,
+          limit,
+          requestLimit,
+          lastBatchSize,
+        })
+
         // Get messages using takeout
         const query = new Api.messages.GetHistory({
           peer: await this.client.getInputEntity(chatId),
           offsetId,
           addOffset: 0,
-          limit,
-          maxId: options?.maxId || 0, // 支持到特定ID结束
-          minId: options?.minId || 0, // 支持增量导出从特定ID开始
-          hash: bigInt(hash.toString()),
+          limit: requestLimit,
+          maxId: options?.maxId || 0,
+          minId: options?.minId || 0,
+          hash: bigInt(hash),
         })
-        this.logger.debug(`message query ${JSON.stringify(query)}`)
 
         // Use error handler for API requests
         const apiResponse = await this.errorHandler.withRetry(
@@ -251,11 +265,27 @@ export class TakeoutManager {
         }
 
         const messages = result.messages as Api.Message[]
+        lastBatchSize = messages.length
 
-        // If we got fewer messages than requested, there are no more
-        hasMore = messages.length === limit
+        // 如果没有获取到消息，或者消息数量小于请求数量，说明没有更多消息了
+        if (messages.length === 0 || messages.length < requestLimit) {
+          hasMore = false
+        }
 
+        let batchProcessedCount = 0 // 记录这一批次处理的消息数量
         for (const message of messages) {
+          // 更新下一次请求的 offsetId
+          offsetId = message.id
+
+          // 检查是否达到边界条件
+          if (options?.maxId && message.id >= options.maxId) {
+            continue
+          }
+          if (options?.minId && message.id <= options.minId) {
+            hasMore = false
+            break
+          }
+
           // Skip empty messages
           if (message instanceof Api.MessageEmpty) {
             continue
@@ -264,7 +294,8 @@ export class TakeoutManager {
           // Check time range
           const messageTime = new Date(message.date * 1000)
           if (options?.startTime && messageTime < options.startTime) {
-            continue
+            hasMore = false
+            break
           }
           if (options?.endTime && messageTime > options.endTime) {
             continue
@@ -283,14 +314,23 @@ export class TakeoutManager {
 
           yield converted
           processedCount++
-
-          // Update offsetId to current message ID
-          offsetId = message.id
+          batchProcessedCount++
 
           // Check if we've reached the limit
-          if (options?.limit && processedCount >= options.limit) {
-            return
+          if (processedCount >= limit) {
+            hasMore = false
+            break
           }
+        }
+
+        // 如果这批次的消息都被过滤掉了，但还有更多消息，继续获取
+        if (batchProcessedCount === 0 && hasMore && lastBatchSize > 0) {
+          this.logger.debug('当前批次所有消息都被过滤，继续获取下一批', {
+            offsetId,
+            lastBatchSize,
+            processedCount,
+          })
+          continue
         }
       }
     }
