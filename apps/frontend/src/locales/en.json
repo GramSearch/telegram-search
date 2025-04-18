@@ -172,6 +172,11 @@
       "no_match": "No matching options",
       "selected": "Selected: {selected}"
     },
+    "phone_number": {
+      "label": "Phone Number",
+      "placeholder": "123 4567 8901",
+      "help_text": "Please select your country/region code and enter your phone number"
+    },
     "export_command": {
       "user_chat": "Chat",
       "group_chat": "Group",

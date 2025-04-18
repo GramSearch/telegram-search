@@ -21,6 +21,7 @@ declare module 'vue' {
     MessageBubble: typeof import('./src/components/MessageBubble.vue')['default']
     NeedLogin: typeof import('./src/components/NeedLogin.vue')['default']
     Pagination: typeof import('./src/components/ui/Pagination.vue')['default']
+    PhoneNumberInput: typeof import('./src/components/ui/PhoneNumberInput.vue')['default']
     ProgressBar: typeof import('./src/components/ui/ProgressBar.vue')['default']
     RadioGroup: typeof import('./src/components/ui/RadioGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

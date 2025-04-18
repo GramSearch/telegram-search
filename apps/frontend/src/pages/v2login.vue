@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
+import PhoneNumberInput from '../components/ui/PhoneNumberInput.vue'
 import { useSessionStore } from '../composables/v2/useSessionV2'
 
 type LoginStep = 'phone' | 'code' | 'password' | 'complete'
@@ -138,20 +139,10 @@ const steps = [
 
     <!-- 手机号码表单 -->
     <form v-if="state.currentStep === 'phone'" class="space-y-4" @submit.prevent="handleLogin">
-      <div>
-        <label for="phoneNumber" class="block text-sm text-gray-700 font-medium">手机号码</label>
-        <input
-          id="phoneNumber"
-          v-model="state.phoneNumber"
-          type="tel"
-          placeholder="+86 123 4567 8901"
-          class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-          required
-        >
-        <p class="mt-1 text-sm text-gray-500">
-          请输入完整的手机号，包括国家代码
-        </p>
-      </div>
+      <PhoneNumberInput
+        v-model="state.phoneNumber"
+        required
+      />
 
       <div>
         <button

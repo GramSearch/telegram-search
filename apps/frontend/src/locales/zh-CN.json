@@ -75,6 +75,11 @@
     "grid_selector": {
       "type": "会话类型"
     },
+    "phone_number": {
+      "label": "手机号码",
+      "placeholder": "123 4567 8901",
+      "help_text": "请选择国家/地区代码并输入您的手机号"
+    },
     "message_bubble": {
       "document": "文档",
       "download": "下载",
