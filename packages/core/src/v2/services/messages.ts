@@ -138,6 +138,7 @@ export function createMessageService(ctx: CoreContext) {
       //   throw new Error(`Chat not found: ${chatId}`)
       // }
 
+      // TODO: Abort signal
       while (hasMore) {
         try {
           const messages = await withRetry(

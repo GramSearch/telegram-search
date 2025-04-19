@@ -5,8 +5,8 @@ import { useLocalStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed, onMounted, ref } from 'vue'
 
-import { apiFetch } from '../api'
-import { useWebsocketV2 } from './useWebsocketV2'
+import { apiFetch } from '../composables/api'
+import { useWebsocketV2 } from '../composables/useWebsocketV2'
 
 export interface SessionContext {
   phoneNumber?: string
@@ -14,13 +14,13 @@ export interface SessionContext {
   me?: CoreUserInfo
 }
 
-export const useSessionStore = defineStore('session-v2', () => {
+export const useSessionStore = defineStore('session', () => {
   let wsContext: ReturnType<typeof useWebsocketV2>
 
   const storageSessions = useLocalStorage('session/sessions', new Map<string, SessionContext>())
   const storageActiveSessionId = useLocalStorage('session/active-session-id', '')
 
-  const auth = ref({
+  const authStatus = ref({
     needCode: false,
     needPassword: false,
   })
@@ -102,10 +102,11 @@ export const useSessionStore = defineStore('session-v2', () => {
     sessions: storageSessions,
     activeSessionId: storageActiveSessionId,
     activeSessionComputed,
-    auth,
+    auth: authStatus,
     getWsContext,
     handleAuth,
     getActiveSession,
     setActiveSession,
+    isLoggedIn: computed(() => activeSessionComputed.value?.isConnected),
   }
 })

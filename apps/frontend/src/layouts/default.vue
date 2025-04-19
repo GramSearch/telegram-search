@@ -8,7 +8,7 @@ import { toast } from 'vue-sonner'
 import DropdownMenu from '../components/ui/DropdownMenu.vue'
 import { useDarkStore } from '../composables/dark'
 import { useLanguage } from '../composables/useLanguage'
-import { useSessionStore } from '../composables/v2/useSessionV2'
+import { useSessionStore } from '../store/useSessionV2'
 
 const router = useRouter()
 const { isDark } = useDarkStore()
@@ -52,13 +52,13 @@ async function handleLogout() {
   showUserMenu.value = false
   handleAuth().logout()
   toast.success(t('header.logout_success'))
-  router.push('/v2login')
+  router.push('/login')
 }
 
 // Handle login
 async function handleLogin() {
   showUserMenu.value = false
-  router.push('/v2login')
+  router.push('/login')
 }
 
 // Handle language change

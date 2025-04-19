@@ -3,8 +3,8 @@ import type { WsEventToServer, WsMessageToClient } from '@tg-search/server'
 import { useWebSocket } from '@vueuse/core'
 import { watch } from 'vue'
 
-import { WS_API_BASE } from '../../constants'
-import { useSessionStore } from './useSessionV2'
+import { WS_API_BASE } from '../constants'
+import { useSessionStore } from '../store/useSessionV2'
 
 let wsContext: ReturnType<typeof createWebsocketV2Context>
 
@@ -45,6 +45,7 @@ export function createWebsocketV2Context(sessionId: string) {
       try {
         switch (message.type) {
           case 'server:connected':
+            connectionStore.getActiveSession()!.isConnected = message.data.connected
             connectionStore.setActiveSession(message.data.sessionId, {})
             break
 

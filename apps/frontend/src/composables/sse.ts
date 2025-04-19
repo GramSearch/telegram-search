@@ -3,7 +3,6 @@ import type { ApiError, ApiResponse, SSEHandlerOptions } from '@tg-search/server
 import { ref } from 'vue'
 
 import { API_BASE } from '../constants'
-import { useSessionStore } from '../store/useSession'
 
 interface SSEEvent {
   event: string
@@ -53,14 +52,6 @@ export function useSSE<T = unknown, R = unknown>() {
   const error = ref<string | null>(null)
   const isConnected = ref(false)
 
-  const {
-    attempts: reconnectAttempts,
-    maxAttempts: maxReconnectAttempts,
-    calculateDelay: reconnectDelay,
-    resetAttempts,
-    recordAttempt,
-  } = useSessionStore()
-
   async function createConnection(
     url: string,
     params: Record<string, unknown>,
@@ -85,7 +76,6 @@ export function useSSE<T = unknown, R = unknown>() {
         throw new Error('No response body')
 
       isConnected.value = true
-      resetAttempts()
 
       try {
         while (true) {
@@ -115,7 +105,6 @@ export function useSSE<T = unknown, R = unknown>() {
                   handlers.onComplete?.(data.data as R)
                 }
                 isConnected.value = false
-                resetAttempts()
                 break
               }
               case 'error': {
@@ -123,7 +112,6 @@ export function useSSE<T = unknown, R = unknown>() {
 
                 handlers.onError?.(new Error(data.message || 'Unknown error') as ApiError)
                 isConnected.value = false
-                recordAttempt()
                 break
               }
             }
@@ -140,7 +128,6 @@ export function useSSE<T = unknown, R = unknown>() {
           isConnected.value = false
           return
         }
-        recordAttempt()
       }
 
       const message = e instanceof Error ? e.message : 'Unknown error'
@@ -157,9 +144,6 @@ export function useSSE<T = unknown, R = unknown>() {
     loading,
     error,
     isConnected,
-    reconnectAttempts,
-    maxReconnectAttempts,
-    reconnectDelay,
     createConnection,
   }
 }

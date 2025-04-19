@@ -2,7 +2,7 @@ import type { FormCoreEvent, ToCoreEvent } from '@tg-search/core'
 import type { Peer } from 'crossws'
 
 export interface WsEventFromServer {
-  'server:connected': (data: { sessionId: string }) => void
+  'server:connected': (data: { sessionId: string, connected: boolean }) => void
   'server:error': (data: { error?: string | Error | unknown }) => void
 }
 

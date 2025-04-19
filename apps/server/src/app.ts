@@ -4,7 +4,7 @@ import type { App } from 'h3'
 import type { WsMessageToServer } from './v2/ws-event'
 
 import { useLogger } from '@tg-search/common'
-import { createCoreInstance, destoryCoreInstance } from '@tg-search/core'
+import { createCoreInstance } from '@tg-search/core'
 import { createRouter, defineEventHandler, defineWebSocketHandler, getQuery } from 'h3'
 
 import { createResponse } from './utils/response'
@@ -112,7 +112,7 @@ export function setupWsRoutes(app: App) {
         sendWsError(peer, error)
       })
 
-      sendWsEvent(peer, 'server:connected', { sessionId })
+      sendWsEvent(peer, 'server:connected', { sessionId, connected: state.isConnected ?? false })
 
       clientStates.set(sessionId, state)
     },
@@ -145,12 +145,12 @@ export function setupWsRoutes(app: App) {
     },
 
     close(peer) {
-      const sessionId = useSessionId(peer)
-      const state = useSessionState(sessionId)
+      // const sessionId = useSessionId(peer)
+      // const state = useSessionState(sessionId)
 
-      if (state && state.ctx) {
-        destoryCoreInstance(state.ctx)
-      }
+      // if (state && state.ctx) {
+      //   destoryCoreInstance(state.ctx)
+      // }
 
       useLogger().withFields({ peerId: peer.id }).debug('[/ws] Websocket connection closed')
     },

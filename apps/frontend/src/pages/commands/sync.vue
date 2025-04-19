@@ -9,7 +9,7 @@ import NeedLogin from '../../components/NeedLogin.vue'
 import ChatSelector from '../../components/sync/ChatSelector.vue'
 import SyncStatus from '../../components/sync/SyncStatus.vue'
 import { useChats } from '../../store/useChats'
-import { useSessionStore } from '../../store/useSession'
+import { useSessionStore } from '../../store/useSessionV2'
 
 const { t } = useI18n()
 const chatStore = useChats()
@@ -17,8 +17,8 @@ const { chats } = storeToRefs(chatStore)
 const { loadChats } = chatStore
 const { executeChatsSync, currentCommand: chatsSyncCommand, syncProgress: chatsSyncProgress } = useSyncChats()
 const { executeMetadataSync, currentCommand: metadataSyncCommand, syncProgress: metadataSyncProgress } = useSyncMetadata()
-const { checkConnection } = useSessionStore()
-const { isConnected } = storeToRefs(useSessionStore())
+const sessionStore = useSessionStore()
+const { isLoggedIn } = storeToRefs(sessionStore)
 
 const selectedChats = ref<number[]>([])
 const priorities = ref<Record<number, number>>({})
@@ -34,7 +34,7 @@ function getChatTitle(chatId: number) {
 }
 
 async function startSync() {
-  if (!isConnected.value) {
+  if (!isLoggedIn.value) {
     toast.error(t('component.sync_command.not_connect'))
     return
   }
@@ -70,7 +70,7 @@ async function confirmPriorities() {
 }
 
 async function syncMetadata() {
-  if (!isConnected.value) {
+  if (!isLoggedIn.value) {
     toast.error(t('component.sync_command.not_connect'))
     return
   }
@@ -110,15 +110,14 @@ watch(() => currentCommand.value?.status, (status) => {
 // Lifecycle
 onMounted(async () => {
   await loadChats()
-  const connected = await checkConnection(false)
-  if (!connected)
+  if (!isLoggedIn.value)
     showConnectButton.value = true
 })
 </script>
 
 <template>
   <div class="space-y-4">
-    <NeedLogin :is-connected="isConnected" />
+    <NeedLogin :is-connected="isLoggedIn" />
 
     <div class="flex items-center justify-between">
       <h3 class="text-lg font-medium">
@@ -130,14 +129,14 @@ onMounted(async () => {
         </span>
         <button
           class="rounded-md bg-blue-500 px-4 py-2 text-white disabled:cursor-not-allowed hover:bg-blue-600 disabled:opacity-50"
-          :disabled="!isConnected"
+          :disabled="!isLoggedIn"
           @click="syncMetadata"
         >
           {{ t('component.sync_command.metadata_sync') }}
         </button>
         <button
           class="rounded-md bg-blue-500 px-4 py-2 text-white disabled:cursor-not-allowed hover:bg-blue-600 disabled:opacity-50"
-          :disabled="selectedChats.length === 0 || !isConnected"
+          :disabled="selectedChats.length === 0 || !isLoggedIn"
           @click="startSync"
         >
           {{ t('component.sync_command.start_sync') }}

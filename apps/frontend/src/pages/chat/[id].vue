@@ -5,7 +5,6 @@ import { computed, nextTick, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-import { useUserInfo } from '../../apis/useUserInfo'
 import { useMessages } from '../../store/useMessages'
 // Local message type with highlight support
 interface LocalMessage extends TelegramMessage {
@@ -16,7 +15,7 @@ interface LocalMessage extends TelegramMessage {
 const messageStore = useMessages()
 const { messages: apiMessages, loading: messagesLoading, chat, total: messagesTotal, error } = storeToRefs(messageStore)
 const { loadMessages: fetchMessages, sendMessage } = messageStore
-const { getUserInfo } = useUserInfo()
+// const { getUserInfo } = useUserInfo()
 const route = useRoute()
 const router = useRouter()
 const messages = ref<LocalMessage[]>([])
@@ -121,9 +120,10 @@ async function copyMessageLink() {
 async function getMessageLink() {
   if (selectedMessage.value) {
     if (chat.value?.type === 'user') {
-      const userInfo = await getUserInfo(chat.value.id.toString())
-      const telegramUrl = `https://t.me/${userInfo.username}/${selectedMessage.value.id}`
-      return telegramUrl
+      // TODO: get user info
+      // const userInfo = await getUserInfo(chat.value.id.toString())
+      // const telegramUrl = `https://t.me/${userInfo.username}/${selectedMessage.value.id}`
+      // return telegramUrl
     }
     else {
       const telegramChatId = chatId.toString().replace(/^-?100/, '')
