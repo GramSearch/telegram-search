@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreDialog, CoreMessage } from '@tg-search/core'
+import type { CoreDialog, CoreMessage, CorePagination } from '@tg-search/core'
 
 import { useScroll, useVirtualList } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
@@ -93,6 +93,12 @@ const messageInput = ref('')
 const { y } = useScroll(containerProps.ref)
 const lastMessagePosition = ref(0)
 
+async function fetchMessages(pagination: CorePagination) {
+  isLoadingMessages.value = true
+  await messageStore.fetchMessagesWithDatabase(id.toString(), pagination)
+  isLoadingMessages.value = false
+}
+
 watch(chatMessages, () => {
   lastMessagePosition.value = containerProps.ref.value?.scrollHeight ?? 0
 
@@ -105,11 +111,7 @@ watch(chatMessages, () => {
 // TODO: useInfiniteScroll?
 watch(y, async () => {
   if (y.value === 0 && !isLoadingMessages.value) {
-    isLoadingMessages.value = true
-
-    await messageStore.fetchMessagesWithDatabase(id.toString(), { offset: messageOffset.value, limit: messageLimit.value })
-
-    isLoadingMessages.value = false
+    fetchMessages({ offset: messageOffset.value, limit: messageLimit.value })
   }
 }, { immediate: true })
 
@@ -127,12 +129,17 @@ function sendMessage() {
 }
 
 const isGlobalSearchOpen = ref(false)
+
+function handleGotoMessage(message: CoreMessage) {
+  const offset = Number(message.platformMessageId) - (messageLimit.value / 2)
+  fetchMessages({ offset, limit: messageLimit.value })
+}
 </script>
 
 <template>
-  <div class="h-full flex flex-col relative">
+  <div class="relative h-full flex flex-col">
     <!-- Chat Header -->
-    <div class="p-4 border-b dark:border-gray-700 flex items-center justify-between">
+    <div class="flex items-center justify-between border-b p-4 dark:border-gray-700">
       <h2 class="text-xl font-semibold dark:text-gray-100">
         {{ currentChat?.name }} | {{ currentChat?.id }}
       </h2>
@@ -158,17 +165,17 @@ const isGlobalSearchOpen = ref(false)
     </div>
 
     <!-- Message Input -->
-    <div class="border-t dark:border-gray-700 p-4">
+    <div class="border-t p-4 dark:border-gray-700">
       <div class="flex gap-2">
         <input
           v-model="messageInput"
           type="text"
           placeholder="Type a message..."
-          class="flex-1 rounded-lg border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 p-2"
+          class="flex-1 border rounded-lg p-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
           @keyup.enter="sendMessage"
         >
         <button
-          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          class="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
           @click="sendMessage"
         >
           Send
@@ -181,11 +188,12 @@ const isGlobalSearchOpen = ref(false)
         ref="searchDialogRef"
         v-model:open="isGlobalSearchOpen"
         :chat-id="id.toString()"
-        class="absolute top-[20%] left-0 w-full"
+        class="absolute left-0 top-[20%] w-full"
+        @goto-message="handleGotoMessage"
       >
         <template #settings>
           <div class="flex items-center">
-            <input id="searchContent" type="checkbox" class="rounded border-border mr-1">
+            <input id="searchContent" type="checkbox" class="border-border mr-1 rounded">
             <label for="searchContent" class="text-sm text-foreground">搜索内容</label>
           </div>
         </template>
