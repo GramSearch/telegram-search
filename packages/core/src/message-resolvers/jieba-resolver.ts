@@ -2,6 +2,7 @@ import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreMessage } from '../utils/message'
 
 import { existsSync, readFileSync } from 'node:fs'
+
 import { Jieba } from '@node-rs/jieba'
 import { useLogger } from '@tg-search/common'
 import { useConfig } from '@tg-search/common/composable'

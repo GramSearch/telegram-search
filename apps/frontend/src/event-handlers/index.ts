@@ -1,4 +1,5 @@
 import type { WsEventToClient, WsEventToClientData } from '@tg-search/server'
+
 import type { ClientSendEventFn } from '../store/useWebsocket'
 
 import { registerAuthEventHandlers } from './auth'

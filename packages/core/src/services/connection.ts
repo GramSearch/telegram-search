@@ -1,6 +1,7 @@
 import type { ProxyConfig } from '@tg-search/common'
 import type { ProxyInterface } from 'telegram/network/connection/TCPMTProxy'
 import type { StringSession } from 'telegram/sessions'
+
 import type { CoreContext } from '../context'
 import type { Result } from '../utils/monad'
 
