@@ -1,5 +1,6 @@
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+
 import Vue from '@vitejs/plugin-vue'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { dirname, join, resolve } from 'pathe'

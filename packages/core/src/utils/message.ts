@@ -1,4 +1,5 @@
 import type { UUID } from 'node:crypto'
+
 import type { Result } from './monad'
 
 import { Api } from 'telegram'

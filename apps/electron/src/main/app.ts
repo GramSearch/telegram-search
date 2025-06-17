@@ -1,8 +1,10 @@
 import type { CoreContext, CoreEventData, FromCoreEvent, ToCoreEvent } from '@tg-search/core'
 import type { BrowserWindow } from 'electron/main'
+
 import type { WsEventToClientData, WsMessageToClient, WsMessageToServer } from './ws-event'
 
 import process from 'node:process'
+
 import { initLogger, parseEnvFlags, useLogger } from '@tg-search/common'
 import { initConfig } from '@tg-search/common/composable'
 import { createCoreInstance, initDrizzle } from '@tg-search/core'

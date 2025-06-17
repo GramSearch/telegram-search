@@ -1,6 +1,7 @@
 import type { NodeOptions } from 'crossws/adapters/node'
 
 import process from 'node:process'
+
 import { flags, initLogger, parseEnvFlags, useLogger } from '@tg-search/common'
 import { initConfig } from '@tg-search/common/composable'
 import { initDrizzle } from '@tg-search/core'

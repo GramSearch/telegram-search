@@ -1,4 +1,5 @@
 import type { TelegramClient } from 'telegram'
+
 import type { ClientInstanceEventFromCore, ClientInstanceEventToCore } from './instance'
 import type { SessionEventFromCore, SessionEventToCore } from './services'
 import type { ConfigEventFromCore, ConfigEventToCore } from './services/config'

@@ -1,4 +1,5 @@
 import type { Entity } from 'telegram/define'
+
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
 

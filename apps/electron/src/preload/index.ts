@@ -1,4 +1,5 @@
 import process from 'node:process'
+
 import { electronAPI } from '@electron-toolkit/preload'
 import { contextBridge } from 'electron'
 
@@ -17,8 +18,8 @@ if (process.contextIsolated) {
   }
 }
 else {
-  // @ts-ignore (define in dts)
+  // @ts-expect-error (define in dts)
   window.electron = electronAPI
-  // @ts-ignore (define in dts)
+  // @ts-expect-error (define in dts)
   window.channel = channelAPI
 }
