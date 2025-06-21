@@ -15,7 +15,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@iconify/vue": "^5.0.0",
     "@node-rs/jieba": "^2.0.1",
-    "@tanstack/vue-query": "^5.80.10",
+    "@tanstack/vue-query": "^5.81.2",
     "@tanstack/vue-table": "^8.21.3",
     "@tg-search/common": "workspace:*",
     "@tg-search/core": "workspace:*",
