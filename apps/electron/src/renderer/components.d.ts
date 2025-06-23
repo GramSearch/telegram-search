@@ -23,5 +23,7 @@ declare module 'vue' {
     SettingsDialog: typeof import('./src/components/layout/SettingsDialog.vue')['default']
     SidebarSelector: typeof import('./src/components/layout/SidebarSelector.vue')['default']
     Stepper: typeof import('./src/components/ui/Stepper.vue')['default']
+    Switch: typeof import('./src/components/ui/Switch/Switch.vue')['default']
+    UserDropdown: typeof import('./src/components/layout/UserDropdown.vue')['default']
   }
 }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { CoreDialog } from '@tg-search/core'
 
+import { usePagination } from '@tg-search/stage-ui'
 import { computed, ref, watch } from 'vue'
 
-import { usePagination } from '../composables/usePagination'
 import Pagination from './ui/Pagination.vue'
 import SelectDropdown from './ui/SelectDropdown.vue'
 
@@ -118,7 +118,7 @@ watch([selectedType, searchQuery], () => {
       <button
         v-for="chat in paginatedChats"
         :key="chat.id"
-        class="relative w-full flex active:scale-98 cursor-pointer items-center border rounded-lg p-4 text-left transition-all duration-300 space-x-3 hover:shadow-md hover:-translate-y-0.5"
+        class="relative w-full flex cursor-pointer items-center border rounded-lg p-4 text-left transition-all duration-300 active:scale-98 space-x-3 hover:shadow-md hover:-translate-y-0.5"
         :class="{
           'border-primary border-1 shadow-md scale-102': isSelected(chat.id),
           'border-secondary hover:border-primary': !isSelected(chat.id),

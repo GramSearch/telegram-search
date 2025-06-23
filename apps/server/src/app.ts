@@ -1,7 +1,9 @@
+import type { UUID } from 'node:crypto'
+
 import type { CoreContext, CoreEventData, FromCoreEvent, ToCoreEvent } from '@tg-search/core'
 import type { Peer } from 'crossws'
 import type { App } from 'h3'
-import type { UUID } from 'node:crypto'
+
 import type { WsEventToClientData, WsMessageToServer } from './ws-event'
 
 import { useLogger } from '@tg-search/common'

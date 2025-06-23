@@ -1,7 +1,7 @@
 import type { ClientRegisterEventHandler } from '.'
 
-import { useAuthStore } from '../store/useAuth'
-import { useWebsocketStore } from '../store/useWebsocket'
+import { useAuthStore } from '../stores/useAuth'
+import { useWebsocketStore } from '../stores/useWebsocket'
 
 export function registerAuthEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

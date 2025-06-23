@@ -1,4 +1,5 @@
 import type { Entity } from 'telegram/define'
+
 import type { CoreEntity } from '../services/entity'
 import type { Result } from './monad'
 

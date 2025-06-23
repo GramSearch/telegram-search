@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { DialogType } from '@tg-search/core'
 
+import { useChatStore, useSettingsStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { useDark } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
@@ -10,9 +11,6 @@ import ChatsCollapse from '../components/layout/ChatsCollapse.vue'
 import SettingsDialog from '../components/layout/SettingsDialog.vue'
 import SidebarSelector from '../components/layout/SidebarSelector.vue'
 import { Button } from '../components/ui/Button'
-import { useChatStore } from '../store/useChat'
-import { useSettingsStore } from '../store/useSettings'
-import { useWebsocketStore } from '../store/useWebsocket'
 
 const settingsStore = useSettingsStore()
 const { theme } = storeToRefs(settingsStore)

@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { useAuthStore, useSettingsStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
-import { useAuthStore } from '../../store/useAuth'
-import { useSettingsStore } from '../../store/useSettings'
 import Dialog from '../ui/Dialog.vue'
 
 const router = useRouter()

@@ -3,6 +3,8 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - airi
+  - Attributify
   - bumpp
   - crossws
   - defu
@@ -19,6 +21,7 @@ words:
   - lucide
   - luoling
   - ofetch
+  - oklch
   - ollama
   - onnotice
   - pathe

@@ -1,6 +1,6 @@
 import type { ClientRegisterEventHandler } from '.'
 
-import { useSettingsStore } from '../store/useSettings'
+import { useSettingsStore } from '../stores/useSettings'
 
 export function registerConfigEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

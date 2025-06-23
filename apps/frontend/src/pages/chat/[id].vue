@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CoreDialog, CoreMessage } from '@tg-search/core'
 
+import { useChatStore, useMessageStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { useScroll, useVirtualList } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
@@ -9,9 +10,6 @@ import { toast } from 'vue-sonner'
 
 import MessageBubble from '../../components/messages/MessageBubble.vue'
 import SearchDialog from '../../components/SearchDialog.vue'
-import { useChatStore } from '../../store/useChat'
-import { useMessageStore } from '../../store/useMessage'
-import { useWebsocketStore } from '../../store/useWebsocket'
 
 // const { ctrl_f, command_f } = useMagicKeys()
 

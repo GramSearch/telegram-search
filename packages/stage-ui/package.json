@@ -1,0 +1,37 @@
+{
+  "name": "@tg-search/stage-ui",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.12.1",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tg-search/common": "workspace:*",
+    "@tg-search/core": "workspace:*",
+    "@tg-search/server": "workspace:*",
+    "@vueuse/core": "^13.4.0",
+    "defu": "^6.1.4",
+    "ofetch": "^1.4.1",
+    "pinia": "^3.0.3",
+    "uuid": "^11.1.0",
+    "vue": "^3.5.17",
+    "vue-sonner": "^2.0.0"
+  },
+  "devDependencies": {
+    "tsdown": "^0.12.8"
+  }
+}

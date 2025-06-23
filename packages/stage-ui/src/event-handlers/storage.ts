@@ -1,7 +1,7 @@
 import type { ClientRegisterEventHandler } from '.'
 
-import { useChatStore } from '../store/useChat'
-import { useMessageStore } from '../store/useMessage'
+import { useChatStore } from '../stores/useChat'
+import { useMessageStore } from '../stores/useMessage'
 
 export function registerStorageEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

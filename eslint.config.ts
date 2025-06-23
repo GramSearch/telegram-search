@@ -8,16 +8,26 @@ export default await antfu({
     '**/drizzle/**/*.json',
   ],
   rules: {
-    'ts/ban-ts-comment': 'off',
-    'import/order': [
+    'import/order': 'off',
+    'antfu/import-dedupe': 'error',
+    'style/padding-line-between-statements': 'error',
+    'perfectionist/sort-imports': [
       'error',
       {
-        'groups': [
-          ['type'],
-          ['builtin', 'external'],
-          ['parent', 'sibling', 'index'],
+        groups: [
+          'type-builtin',
+          'type-import',
+          'type-internal',
+          ['type-parent', 'type-sibling', 'type-index'],
+          'value-builtin',
+          'value-external',
+          'value-internal',
+          ['value-parent', 'value-sibling', 'value-index'],
+          ['wildcard-value-parent', 'wildcard-value-sibling', 'wildcard-value-index'],
+          'side-effect',
+          'style',
         ],
-        'newlines-between': 'always',
+        newlinesBetween: 'always',
       },
     ],
   },
