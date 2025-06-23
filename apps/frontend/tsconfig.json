@@ -31,5 +31,5 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ]
+, "../../packages/stage-ui/constants.ts"  ]
 }

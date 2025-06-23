@@ -1,6 +1,6 @@
 import type { ClientRegisterEventHandlerFn } from '.'
 
-import { useChatStore } from '../store/useChat'
+import { useChatStore } from '../stores/useChat'
 
 export function registerDialogEventHandlers(
   registerEventHandler: ClientRegisterEventHandlerFn,

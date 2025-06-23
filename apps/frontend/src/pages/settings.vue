@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { useSettingsStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 import { toast } from 'vue-sonner'
 
 import { Button } from '../components/ui/Button'
 import SelectDropdown from '../components/ui/SelectDropdown.vue'
-import { useSettingsStore } from '../store/useSettings'
-import { useWebsocketStore } from '../store/useWebsocket'
 
 const isEditing = ref(false)
 const { config } = storeToRefs(useSettingsStore())

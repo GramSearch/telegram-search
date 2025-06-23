@@ -2,7 +2,7 @@ import type { ClientRegisterEventHandler } from '.'
 
 import { toast } from 'vue-sonner'
 
-import { useWebsocketStore } from '../store/useWebsocket'
+import { useWebsocketStore } from '../stores/useWebsocket'
 
 export function registerServerEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

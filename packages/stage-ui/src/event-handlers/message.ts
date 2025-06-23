@@ -1,6 +1,6 @@
 import type { ClientRegisterEventHandlerFn } from '.'
 
-import { useMessageStore } from '../store/useMessage'
+import { useMessageStore } from '../stores/useMessage'
 
 export function registerMessageEventHandlers(
   registerEventHandler: ClientRegisterEventHandlerFn,

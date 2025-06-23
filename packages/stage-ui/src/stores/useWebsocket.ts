@@ -9,7 +9,7 @@ import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
 import { computed, ref, watch } from 'vue'
 
-import { WS_API_BASE } from '../constants'
+import { WS_API_BASE } from '../../constants'
 import { getRegisterEventHandler, registerAllEventHandlers } from '../event-handlers'
 
 export type ClientSendEventFn = <T extends keyof WsEventToServer>(event: T, data?: WsEventToServerData<T>) => void

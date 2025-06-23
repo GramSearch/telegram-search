@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import { useAuthStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-
-import { useAuthStore } from '../store/useAuth'
-import { useWebsocketStore } from '../store/useWebsocket'
 
 type LoginStep = 'phone' | 'code' | 'password' | 'complete'
 

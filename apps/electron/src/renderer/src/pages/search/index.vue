@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { CoreRetrievalMessages } from '@tg-search/core'
 
+import { useWebsocketStore } from '@tg-search/stage-ui'
 import { useDebounce } from '@vueuse/core'
 import { ref, watch } from 'vue'
 
 import MessageList from '../../components/messages/MessageList.vue'
-import { useWebsocketStore } from '../../store/useWebsocket'
 
 const isLoading = ref(false)
 const showSettings = ref(false)

@@ -1,6 +1,6 @@
 import type { ClientRegisterEventHandler } from '.'
 
-import { useSyncTaskStore } from '../store/useSyncTask'
+import { useSyncTaskStore } from '../stores/useSyncTask'
 
 export function registerTakeoutEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

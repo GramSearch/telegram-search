@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import { useAuthStore, useChatStore, useSyncTaskStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 
 import ChatSelector from '../components/ChatSelector.vue'
 import { Button } from '../components/ui/Button'
-import { useAuthStore } from '../store/useAuth'
-import { useChatStore } from '../store/useChat'
-import { useSyncTaskStore } from '../store/useSyncTask'
-import { useWebsocketStore } from '../store/useWebsocket'
+import { Switch } from '../components/ui/Switch'
 
 const selectedChats = ref<number[]>([])
 
@@ -19,7 +17,7 @@ const websocketStore = useWebsocketStore()
 const chatsStore = useChatStore()
 const { chats } = storeToRefs(chatsStore)
 
-const { currentTask, currentTaskProgress } = storeToRefs(useSyncTaskStore())
+const { currentTask, currentTaskProgress, increase } = storeToRefs(useSyncTaskStore())
 const loadingToast = ref<string | number>()
 
 // 计算属性判断按钮是否应该禁用
@@ -32,6 +30,7 @@ const isButtonDisabled = computed(() => {
 function handleSync() {
   websocketStore.sendEvent('takeout:run', {
     chatIds: selectedChats.value.map(id => id.toString()),
+    increase: increase.value,
   })
 
   loadingToast.value = toast.loading('开始同步...')
@@ -93,6 +92,12 @@ watch(currentTaskProgress, (progress) => {
         选择要同步的聊天
       </h3>
       <div class="flex items-center gap-2">
+        <div>
+          <Switch
+            v-model="increase"
+            label="增量同步"
+          />
+        </div>
         <span class="text-sm text-secondary-foreground">
           已选择 {{ selectedChats.length }} 个聊天
         </span>

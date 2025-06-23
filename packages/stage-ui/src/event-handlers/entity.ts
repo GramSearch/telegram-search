@@ -1,6 +1,6 @@
 import type { ClientRegisterEventHandler } from '.'
 
-import { useWebsocketStore } from '../store/useWebsocket'
+import { useWebsocketStore } from '../stores/useWebsocket'
 
 export function registerEntityEventHandlers(
   registerEventHandler: ClientRegisterEventHandler,

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuthStore, useChatStore, useSyncTaskStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
@@ -6,10 +7,6 @@ import { toast } from 'vue-sonner'
 import ChatSelector from '../components/ChatSelector.vue'
 import { Button } from '../components/ui/Button'
 import { Switch } from '../components/ui/Switch'
-import { useAuthStore } from '../store/useAuth'
-import { useChatStore } from '../store/useChat'
-import { useSyncTaskStore } from '../store/useSyncTask'
-import { useWebsocketStore } from '../store/useWebsocket'
 
 const selectedChats = ref<number[]>([])
 
