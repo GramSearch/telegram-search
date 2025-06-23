@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuthStore, useSettingsStore } from '@tg-search/stage-ui'
+import { useAuthStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
@@ -7,9 +7,6 @@ import Dialog from '../ui/Dialog.vue'
 
 const router = useRouter()
 const showDialog = defineModel<boolean>('showDialog', { required: true })
-
-const settingsStore = useSettingsStore()
-const { theme: selectedTheme, themesOptions } = storeToRefs(settingsStore)
 
 const sessionStore = useAuthStore()
 const { isLoggedIn } = storeToRefs(sessionStore)
@@ -36,30 +33,6 @@ function handleLogin() {
       </button>
     </div>
     <div class="space-y-4">
-      <div class="flex items-center justify-between rounded-lg p-3 text-foreground transition-colors hover:bg-popover/50">
-        <div class="flex items-center gap-2">
-          <div class="i-lucide-palette h-5 w-5" />
-          <span>主题</span>
-        </div>
-        <select
-          v-model="selectedTheme"
-          class="border-input focus-visible:ring-ring h-9 w-[180px] border rounded-md bg-background px-3 py-1 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-        >
-          <option v-for="theme in themesOptions" :key="theme.value" :value="theme.value">
-            {{ theme.name }}
-          </option>
-        </select>
-      </div>
-      <div class="flex items-center justify-between rounded-lg p-3 text-foreground transition-colors hover:bg-popover/50">
-        <div class="flex items-center gap-2">
-          <div class="i-lucide-globe h-5 w-5" />
-          <span>语言</span>
-        </div>
-        <button class="transition-colors">
-          None
-        </button>
-      </div>
-
       <div v-if="!isLoggedIn" class="flex items-center justify-between rounded-lg p-3 text-foreground transition-colors hover:bg-popover/50">
         <div class="flex items-center gap-2">
           <div class="i-lucide-log-in h-5 w-5" />

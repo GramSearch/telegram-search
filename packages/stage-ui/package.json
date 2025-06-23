@@ -24,6 +24,7 @@
     "@tg-search/core": "workspace:*",
     "@tg-search/server": "workspace:*",
     "@vueuse/core": "^13.4.0",
+    "culori": "^4.0.1",
     "defu": "^6.1.4",
     "ofetch": "^1.4.1",
     "pinia": "^3.0.3",
@@ -32,6 +33,7 @@
     "vue-sonner": "^2.0.0"
   },
   "devDependencies": {
+    "@types/culori": "^4.0.0",
     "tsdown": "^0.12.8"
   }
 }
