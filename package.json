@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0-beta.11",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.12.2",
   "scripts": {
     "build": "pnpm -r build",
     "stub": "pnpm -r stub",
@@ -23,7 +23,7 @@
     "db:kit": "tsx scripts/db.ts"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.15.0",
+    "@antfu/eslint-config": "^4.16.1",
     "@proj-airi/unocss-preset-chromatic": "^0.0.3",
     "@types/node": "^24.0.3",
     "bumpp": "^10.2.0",

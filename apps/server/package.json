@@ -23,8 +23,8 @@
   "dependencies": {
     "@tg-search/common": "workspace:*",
     "@tg-search/core": "workspace:*",
-    "crossws": "0.3.5",
-    "es-toolkit": "^1.39.3",
+    "crossws": "0.4.1",
+    "es-toolkit": "^1.39.4",
     "h3": "^1.15.3",
     "listhen": "^1.9.0",
     "tsx": "^4.20.3",
