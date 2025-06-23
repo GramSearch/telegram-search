@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tg-search/common": "workspace:*",
