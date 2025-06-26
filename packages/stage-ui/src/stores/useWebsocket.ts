@@ -35,7 +35,12 @@ export const useWebsocketStore = defineStore('websocket', () => {
     storageActiveSessionId.value = uuidv4()
   }
 
-  const wsUrlComputed = computed(() => `${WS_API_BASE}?sessionId=${storageActiveSessionId.value}`)
+  const wsUrlComputed = computed(() => {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const host = window.location.host
+    return `${protocol}//${host}${WS_API_BASE}?sessionId=${storageActiveSessionId.value}`
+  })
+
   const wsSocket = ref(useWebSocket<keyof WsMessageToClient>(wsUrlComputed.value, {
     onDisconnected: () => {
       // eslint-disable-next-line no-console
