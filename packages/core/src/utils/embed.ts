@@ -20,13 +20,11 @@ export async function embedContents(contents: string[]) {
         model: embeddingConfig.model,
       })
       break
-    case EmbeddingProvider.OLLAMA: {
-      const ollama = createOllama(embeddingConfig.apiBase)
+    case EmbeddingProvider.OLLAMA:
       embeddings = await embedMany({
-        ...ollama.chat(embeddingConfig.model),
+        ...createOllama(embeddingConfig.apiBase).chat(embeddingConfig.model),
         input: contents,
       })
-    }
       break
     default:
       throw new Error(`Unsupported embedding model: ${embeddingConfig.provider}`)
