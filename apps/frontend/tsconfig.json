@@ -14,18 +14,14 @@
     "resolveJsonModule": true,
     "types": [
       "vite/client",
-      "vite-plugin-vue-layouts/client"
+      "vite-plugin-vue-layouts/client",
+      "node"
     ],
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

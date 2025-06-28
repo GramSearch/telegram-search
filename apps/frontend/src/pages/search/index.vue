@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreRetrievalMessages } from '@tg-search/core'
+import type { CoreRetrievalMessages } from '@tg-search/core/types'
 
 import { useWebsocketStore } from '@tg-search/stage-ui'
 import { useDebounce } from '@vueuse/core'

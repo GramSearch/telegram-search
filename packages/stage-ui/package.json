@@ -4,19 +4,9 @@
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
+    ".": "./src/index.ts"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -33,7 +23,6 @@
     "vue-sonner": "^2.0.0"
   },
   "devDependencies": {
-    "@types/culori": "^4.0.0",
-    "tsdown": "^0.12.8"
+    "@types/culori": "^4.0.0"
   }
 }

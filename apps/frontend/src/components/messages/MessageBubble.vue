@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreMessage } from '@tg-search/core'
+import type { CoreMessage } from '@tg-search/core/types'
 
 import Avatar from '../ui/Avatar.vue'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreMessage } from '@tg-search/core'
+import type { CoreMessage } from '@tg-search/core/types'
 
 import { useClipboard } from '@vueuse/core'
 import { ref } from 'vue'

@@ -1,4 +1,4 @@
-import type { WsEventToClient, WsEventToClientData } from '@tg-search/server'
+import type { WsEventToClient, WsEventToClientData } from '@tg-search/server/types'
 
 import type { ClientSendEventFn } from '../stores/useWebsocket'
 

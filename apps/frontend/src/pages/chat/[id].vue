@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreDialog, CoreMessage } from '@tg-search/core'
+import type { CoreDialog, CoreMessage } from '@tg-search/core/types'
 
 import { useChatStore, useMessageStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { useScroll, useVirtualList } from '@vueuse/core'

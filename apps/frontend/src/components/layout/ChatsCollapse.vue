@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreDialog, DialogType } from '@tg-search/core'
+import type { CoreDialog, DialogType } from '@tg-search/core/types'
 
 import { useRoute, useRouter } from 'vue-router'
 

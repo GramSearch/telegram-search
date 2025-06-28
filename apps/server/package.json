@@ -3,21 +3,12 @@
   "type": "module",
   "version": "1.0.0-beta.14",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "serve": "vite-node src/index.ts",
     "dev": "vite-node src/index.ts",
-    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

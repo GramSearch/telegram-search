@@ -4,19 +4,10 @@
   "version": "1.0.0-beta.14",
   "private": true,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -39,7 +30,6 @@
     "vectorlite": "^0.2.0"
   },
   "devDependencies": {
-    "@types/pg": "^8.15.4",
-    "tsdown": "^0.12.8"
+    "@types/pg": "^8.15.4"
   }
 }
