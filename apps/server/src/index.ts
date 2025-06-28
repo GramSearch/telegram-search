@@ -10,9 +10,6 @@ import { listen } from 'listhen'
 
 import { setupWsRoutes } from './app'
 
-export type * from './app'
-export type * from './ws-event'
-
 async function initCore(): Promise<ReturnType<typeof useLogger>> {
   parseEnvFlags(process.env as Record<string, string>)
   initLogger()

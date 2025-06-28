@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreDialog } from '@tg-search/core'
+import type { CoreDialog } from '@tg-search/core/types'
 
 import { usePagination } from '@tg-search/stage-ui'
 import { computed, ref, watch } from 'vue'

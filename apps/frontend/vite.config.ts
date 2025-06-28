@@ -2,15 +2,21 @@ import { env } from 'node:process'
 
 import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
+import Unused from 'unplugin-unused/vite'
 import Components from 'unplugin-vue-components/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig } from 'vite'
+import Inspect from 'vite-plugin-inspect'
 import Devtools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
 
 export default defineConfig({
   plugins: [
+    Inspect(),
+
+    Unused(),
+
     Devtools(),
 
     VueMacros({
