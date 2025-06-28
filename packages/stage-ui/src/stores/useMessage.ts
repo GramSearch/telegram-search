@@ -15,12 +15,10 @@ export const useMessageStore = defineStore('message', () => {
     messages.forEach((message) => {
       const { chatId } = message
 
-      if (messagesByChat.value.has(chatId)) {
-        messagesByChat.value.get(chatId)!.set(message.platformMessageId, message)
-      }
-      else {
+      if (!messagesByChat.value.has(chatId)) {
         messagesByChat.value.set(chatId, new Map())
       }
+      messagesByChat.value.get(chatId)!.set(message.platformMessageId, message)
     })
   }
 
