@@ -107,7 +107,7 @@ watch([selectedType, searchQuery], () => {
         <input
           v-model="searchQuery"
           type="text"
-          class="border-secondary bg-muted w-full border rounded-md px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
+          class="bg-muted border-secondary w-full border rounded-md px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
           placeholder="Search"
         >
       </div>

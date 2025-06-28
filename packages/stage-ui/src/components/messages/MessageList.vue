@@ -29,7 +29,7 @@ function copyMessageLink(message: CoreMessage) {
     <li
       v-for="item in props.messages"
       :key="item.uuid"
-      class="animate-slide-in group hover:bg-muted/50 relative flex cursor-pointer items-center gap-2 border-b p-2 transition-all duration-200 ease-in-out last:border-b-0"
+      class="group animate-slide-in hover:bg-muted/50 relative flex cursor-pointer items-center gap-2 border-b p-2 transition-all duration-200 ease-in-out last:border-b-0"
       tabindex="0"
       @mouseenter="hoveredMessage = item"
       @mouseleave="hoveredMessage = null"
@@ -47,7 +47,7 @@ function copyMessageLink(message: CoreMessage) {
       </div>
       <div
         v-if="hoveredMessage === item"
-        class="bg-background/50 text-muted-foreground absolute bottom-0.5 right-0.5 flex items-center gap-0.5 rounded px-1 py-0.5 text-[10px] opacity-50"
+        class="text-muted-foreground bg-background/50 absolute bottom-0.5 right-0.5 flex items-center gap-0.5 rounded px-1 py-0.5 text-[10px] opacity-50"
       >
         <span>{{ copied ? '已复制' : '按下复制消息链接' }}</span>
         <span v-if="!copied" class="i-lucide-corner-down-left h-2.5 w-2.5" />

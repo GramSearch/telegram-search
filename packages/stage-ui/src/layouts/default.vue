@@ -90,7 +90,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         <input
           v-model="searchParams"
           type="text"
-          class="focus:ring-ring border-secondary bg-muted ring-offset-background dark:border-secondary dark:bg-muted placeholder:text-muted-foreground w-full border rounded-md px-3 py-2 pl-9 focus:outline-none focus:ring-2"
+          class="border-secondary bg-muted ring-offset-background focus:ring-ring placeholder:text-muted-foreground dark:bg-muted dark:border-secondary w-full border rounded-md px-3 py-2 pl-9 focus:outline-none focus:ring-2"
           placeholder="Search"
         >
       </div>

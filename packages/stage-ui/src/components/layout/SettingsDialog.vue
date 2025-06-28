@@ -25,7 +25,7 @@ function handleLogin() {
   <Dialog v-model="showDialog">
     <div class="mb-6 flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <div class="i-lucide-settings text-foreground h-5 w-5" />
+        <div class="text-foreground i-lucide-settings h-5 w-5" />
         <span class="text-foreground text-lg font-medium">设置</span>
       </div>
       <button class="text-foreground hover:bg-popover/50 rounded-md p-1 transition-colors" @click="showDialog = false">
