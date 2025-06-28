@@ -2,12 +2,14 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
 import Vue from '@vitejs/plugin-vue'
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
-import { dirname, join, resolve } from 'pathe'
+import { externalizeDepsPlugin } from 'electron-vite'
+import { dirname, resolve } from 'pathe'
 import UnoCSS from 'unocss/vite'
-import Components from 'unplugin-vue-components/vite'
+import Unused from 'unplugin-unused/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
+import { defineConfig } from 'vite'
+import Inspect from 'vite-plugin-inspect'
 import Devtools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
 
@@ -43,11 +45,19 @@ export default defineConfig({
     plugins: [
       externalizeDepsPlugin(),
 
+      Inspect(),
+
+      Unused(),
+
       Devtools(),
 
       // https://github.com/posva/unplugin-vue-router
       VueRouter({
-        routesFolder: join('src', 'renderer', 'src', 'pages'),
+        routesFolder: '../../packages/stage-ui/src/pages',
+      }),
+
+      Layouts({
+        layoutsDirs: '../../packages/stage-ui/src/layouts',
       }),
 
       VueMacros({
@@ -63,16 +73,9 @@ export default defineConfig({
         },
       }),
 
-      // https://github.com/antfu/vite-plugin-components
-      Components({
-        dts: true,
-      }),
-
       // https://github.com/antfu/unocss
       // see uno.config.ts for config
       UnoCSS(),
-
-      Layouts(),
     ],
 
     resolve: { alias },

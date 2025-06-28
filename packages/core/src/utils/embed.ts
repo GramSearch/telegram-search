@@ -1,10 +1,10 @@
 import type { EmbedManyResult } from '@xsai/embed'
 
 import { EmbeddingProvider } from '@tg-search/common'
-import { useConfig } from '../../../common/src/node'
 import { createOllama } from '@xsai-ext/providers-local'
 import { embedMany } from '@xsai/embed'
 
+import { useConfig } from '../../../common/src/node'
 import { Ok } from './monad'
 
 export async function embedContents(contents: string[]) {

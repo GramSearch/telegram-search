@@ -5,9 +5,9 @@ import { existsSync, readFileSync } from 'node:fs'
 
 import { Jieba } from '@node-rs/jieba'
 import { useLogger } from '@tg-search/common'
-import { useConfig } from '../../../../common/src/node'
 import { and, eq, sql } from 'drizzle-orm'
 
+import { useConfig } from '../../../../common/src/node'
 import { withDb } from '../../db'
 import { chatMessagesTable } from '../../db/schema'
 

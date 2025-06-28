@@ -10,8 +10,8 @@ import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 import { useLogger } from '@tg-search/common'
-import { getMediaPath, useConfig } from '../../../common/src/node'
 
+import { getMediaPath, useConfig } from '../../../common/src/node'
 import { Ok } from '../utils/monad'
 
 export function createMediaResolver(ctx: CoreContext): MessageResolver {

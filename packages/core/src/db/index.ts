@@ -4,7 +4,6 @@ import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 import { PGlite } from '@electric-sql/pglite'
 import { vector } from '@electric-sql/pglite/vector'
 import { DatabaseType, flags, useLogger } from '@tg-search/common'
-import { getDatabaseDSN, getDatabaseFilePath, getDrizzlePath, useConfig } from '../../../common/src/node'
 import { sql } from 'drizzle-orm'
 import { drizzle as drizzlePGlite } from 'drizzle-orm/pglite'
 import { migrate as migratePGlite } from 'drizzle-orm/pglite/migrator'
@@ -12,6 +11,7 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate as migratePg } from 'drizzle-orm/postgres-js/migrator'
 import postgres from 'postgres'
 
+import { getDatabaseDSN, getDatabaseFilePath, getDrizzlePath, useConfig } from '../../../common/src/node'
 import { Err, Ok } from '../utils/monad'
 
 interface BaseDB {

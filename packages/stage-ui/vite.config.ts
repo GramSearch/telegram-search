@@ -3,6 +3,7 @@ import { env } from 'node:process'
 import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import Unused from 'unplugin-unused/vite'
+import Components from 'unplugin-vue-components/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig } from 'vite'
@@ -18,15 +19,6 @@ export default defineConfig({
 
     Devtools(),
 
-    // https://github.com/posva/unplugin-vue-router
-    VueRouter({
-      routesFolder: '../../packages/stage-ui/src/pages',
-    }),
-
-    Layouts({
-      layoutsDirs: '../../packages/stage-ui/src/layouts',
-    }),
-
     VueMacros({
       defineOptions: false,
       defineModels: false,
@@ -40,9 +32,19 @@ export default defineConfig({
       },
     }),
 
+    // https://github.com/posva/unplugin-vue-router
+    VueRouter(),
+
+    // https://github.com/antfu/vite-plugin-components
+    Components({
+      dts: true,
+    }),
+
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
     UnoCSS(),
+
+    Layouts(),
   ],
 
   // Proxy API requests to local development server

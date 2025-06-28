@@ -97,6 +97,9 @@ importers:
       '@tg-search/stage':
         specifier: workspace:*
         version: link:../../packages/stage
+      '@tg-search/stage-ui':
+        specifier: workspace:^
+        version: link:../../packages/stage-ui
       '@vueuse/core':
         specifier: ^13.4.0
         version: 13.4.0(vue@3.5.17(typescript@5.8.3))
@@ -148,7 +151,7 @@ importers:
         version: 66.2.3
       '@vitejs/plugin-vue':
         specifier: ^5.2.4
-        version: 5.2.4(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+        version: 5.2.4(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
       '@vue-macros/volar':
         specifier: ^3.0.0-beta.14
         version: 3.0.0-beta.14(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
@@ -160,28 +163,28 @@ importers:
         version: 26.0.12(electron-builder-squirrel-windows@25.1.8)
       electron-vite:
         specifier: ^3.1.0
-        version: 3.1.0(patch_hash=30174b0e57be3bb1231838b8d1c609fbad9f2c190bb02f96183ba1b8991d4dba)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
+        version: 3.1.0(patch_hash=30174b0e57be3bb1231838b8d1c609fbad9f2c190bb02f96183ba1b8991d4dba)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))
       pathe:
         specifier: ^2.0.3
         version: 2.0.3
       unocss:
         specifier: ^66.2.3
-        version: 66.2.3(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-      unplugin-vue-components:
-        specifier: ^28.7.0
-        version: 28.7.0(@babel/parser@7.27.5)(vue@3.5.17(typescript@5.8.3))
+        version: 66.2.3(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
       unplugin-vue-macros:
         specifier: ^2.14.5
-        version: 2.14.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(esbuild@0.25.2)(rollup@4.35.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
+        version: 2.14.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(esbuild@0.25.2)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
       unplugin-vue-router:
         specifier: ^0.12.0
         version: 0.12.0(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
+      vite-plugin-inspect:
+        specifier: ^11.2.0
+        version: 11.2.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))
       vite-plugin-vue-devtools:
         specifier: ^7.7.7
-        version: 7.7.7(rollup@4.35.0)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+        version: 7.7.7(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(vue@3.5.17(typescript@5.8.3))
       vite-plugin-vue-layouts:
         specifier: ^0.11.0
-        version: 0.11.0(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
+        version: 0.11.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       vue-tsc:
         specifier: ^3.0.0-beta.3
         version: 3.0.0-beta.3(typescript@5.8.3)
@@ -209,6 +212,9 @@ importers:
       '@tg-search/stage':
         specifier: workspace:^
         version: link:../../packages/stage
+      '@tg-search/stage-ui':
+        specifier: workspace:^
+        version: link:../../packages/stage-ui
       '@vueuse/core':
         specifier: ^13.4.0
         version: 13.4.0(vue@3.5.17(typescript@5.8.3))
@@ -261,9 +267,6 @@ importers:
       unocss:
         specifier: ^66.2.3
         version: 66.2.3(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-      unplugin-vue-components:
-        specifier: ^28.7.0
-        version: 28.7.0(@babel/parser@7.27.5)(vue@3.5.17(typescript@5.8.3))
       unplugin-vue-macros:
         specifier: ^2.14.5
         version: 2.14.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(esbuild@0.25.2)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
@@ -440,6 +443,103 @@ importers:
       '@types/culori':
         specifier: ^4.0.0
         version: 4.0.0
+
+  packages/stage-ui:
+    dependencies:
+      '@formkit/auto-animate':
+        specifier: ^0.8.2
+        version: 0.8.2
+      '@iconify-json/lucide':
+        specifier: ^1.2.51
+        version: 1.2.51
+      '@iconify/vue':
+        specifier: ^5.0.0
+        version: 5.0.0(vue@3.5.17(typescript@5.8.3))
+      '@tanstack/vue-query':
+        specifier: ^5.81.2
+        version: 5.81.2(vue@3.5.17(typescript@5.8.3))
+      '@tanstack/vue-table':
+        specifier: ^8.21.3
+        version: 8.21.3(vue@3.5.17(typescript@5.8.3))
+      '@tg-search/core':
+        specifier: workspace:^
+        version: link:../core
+      '@tg-search/stage':
+        specifier: workspace:^
+        version: link:../stage
+      '@vueuse/core':
+        specifier: ^13.4.0
+        version: 13.4.0(vue@3.5.17(typescript@5.8.3))
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
+      ofetch:
+        specifier: ^1.4.1
+        version: 1.4.1
+      pinia:
+        specifier: ^3.0.3
+        version: 3.0.3(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+      radix-vue:
+        specifier: ^1.9.17
+        version: 1.9.17(vue@3.5.17(typescript@5.8.3))
+      reka-ui:
+        specifier: ^2.3.1
+        version: 2.3.1(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+      uuid:
+        specifier: ^11.1.0
+        version: 11.1.0
+      vue:
+        specifier: ^3.5.17
+        version: 3.5.17(typescript@5.8.3)
+      vue-i18n:
+        specifier: ^11.1.7
+        version: 11.1.7(vue@3.5.17(typescript@5.8.3))
+      vue-router:
+        specifier: ^4.5.1
+        version: 4.5.1(vue@3.5.17(typescript@5.8.3))
+      vue-sonner:
+        specifier: ^2.0.0
+        version: 2.0.0
+    devDependencies:
+      '@unocss/eslint-config':
+        specifier: ^66.2.3
+        version: 66.2.3(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
+      '@unocss/eslint-plugin':
+        specifier: ^66.2.3
+        version: 66.2.3(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
+      '@unocss/reset':
+        specifier: ^66.2.3
+        version: 66.2.3
+      '@vitejs/plugin-vue':
+        specifier: ^5.2.4
+        version: 5.2.4(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      '@vue-macros/volar':
+        specifier: ^3.0.0-beta.14
+        version: 3.0.0-beta.14(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
+      unocss:
+        specifier: ^66.2.3
+        version: 66.2.3(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      unplugin-vue-components:
+        specifier: ^28.7.0
+        version: 28.7.0(@babel/parser@7.27.5)(vue@3.5.17(typescript@5.8.3))
+      unplugin-vue-macros:
+        specifier: ^2.14.5
+        version: 2.14.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(esbuild@0.25.2)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
+      unplugin-vue-router:
+        specifier: ^0.12.0
+        version: 0.12.0(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
+      vite-plugin-inspect:
+        specifier: ^11.2.0
+        version: 11.2.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))
+      vite-plugin-vue-devtools:
+        specifier: ^7.7.7
+        version: 7.7.7(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(vue@3.5.17(typescript@5.8.3))
+      vite-plugin-vue-layouts:
+        specifier: ^0.11.0
+        version: 0.11.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
+      vue-tsc:
+        specifier: ^3.0.0-beta.3
+        version: 3.0.0-beta.3(typescript@5.8.3)
 
 packages:
 
@@ -766,8 +866,8 @@ packages:
     resolution: {integrity: sha512-Qkzpg2s9GnVV2I2BjRksUi43U5e6+zaQMcjoJy0C+C5oxaKl+fmckGDQFtRpZpZV0NQekuZZ+tGz7EA9TVnQtQ==}
     engines: {node: '>=12'}
 
-  '@electron/node-gyp@git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
-    resolution: {commit: 06b29aafb7708acef8b3669835c8a7857ebc92d2, repo: git@github.com:electron/node-gyp.git, type: git}
+  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
+    resolution: {tarball: https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2}
     version: 10.2.0-electron.1
     engines: {node: '>=12.13.0'}
     hasBin: true
@@ -6438,7 +6538,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/node-gyp@git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
+  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
     dependencies:
       env-paths: 2.2.1
       exponential-backoff: 3.1.2
@@ -6495,7 +6595,7 @@ snapshots:
 
   '@electron/rebuild@3.7.0':
     dependencies:
-      '@electron/node-gyp': git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2
+      '@electron/node-gyp': https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2
       '@malept/cross-spawn-promise': 2.0.0
       chalk: 4.1.2
       debug: 4.4.1
@@ -7488,16 +7588,6 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/astro@66.2.3(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))':
-    dependencies:
-      '@unocss/core': 66.2.3
-      '@unocss/reset': 66.2.3
-      '@unocss/vite': 66.2.3(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-    optionalDependencies:
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - vue
-
   '@unocss/cli@66.2.3':
     dependencies:
       '@ampproject/remapping': 2.3.0
@@ -7661,29 +7751,9 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/vite@66.2.3(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@unocss/config': 66.2.3
-      '@unocss/core': 66.2.3
-      '@unocss/inspector': 66.2.3(vue@3.5.17(typescript@5.8.3))
-      chokidar: 3.6.0
-      magic-string: 0.30.17
-      pathe: 2.0.3
-      tinyglobby: 0.2.14
-      unplugin-utils: 0.2.4
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - vue
-
   '@vitejs/plugin-vue@5.2.4(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))':
     dependencies:
       vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
-      vue: 3.5.17(typescript@5.8.3)
-
-  '@vitejs/plugin-vue@5.2.4(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))':
-    dependencies:
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
       vue: 3.5.17(typescript@5.8.3)
 
   '@vitest/eslint-plugin@1.2.7(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.0.3)(jiti@2.4.2)(jsdom@26.1.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))':
@@ -7885,15 +7955,6 @@ snapshots:
       vue: 3.5.17(typescript@5.8.3)
     optionalDependencies:
       vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - typescript
-
-  '@vue-macros/devtools@0.4.1(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))':
-    dependencies:
-      sirv: 3.0.1
-      vue: 3.5.17(typescript@5.8.3)
-    optionalDependencies:
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
     transitivePeerDependencies:
       - typescript
 
@@ -8124,18 +8185,6 @@ snapshots:
       nanoid: 5.1.3
       pathe: 2.0.3
       vite-hot-client: 2.0.4(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))
-      vue: 3.5.17(typescript@5.8.3)
-    transitivePeerDependencies:
-      - vite
-
-  '@vue/devtools-core@7.7.7(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))':
-    dependencies:
-      '@vue/devtools-kit': 7.7.7
-      '@vue/devtools-shared': 7.7.7
-      mitt: 3.0.1
-      nanoid: 5.1.3
-      pathe: 2.0.3
-      vite-hot-client: 2.0.4(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
       vue: 3.5.17(typescript@5.8.3)
     transitivePeerDependencies:
       - vite
@@ -9171,7 +9220,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron-vite@3.1.0(patch_hash=30174b0e57be3bb1231838b8d1c609fbad9f2c190bb02f96183ba1b8991d4dba)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)):
+  electron-vite@3.1.0(patch_hash=30174b0e57be3bb1231838b8d1c609fbad9f2c190bb02f96183ba1b8991d4dba)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)):
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-arrow-functions': 7.27.1(@babel/core@7.26.10)
@@ -9179,7 +9228,7 @@ snapshots:
       esbuild: 0.25.2
       magic-string: 0.30.17
       picocolors: 1.1.1
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
+      vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11978,47 +12027,12 @@ snapshots:
       - supports-color
       - vue
 
-  unocss@66.2.3(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)):
-    dependencies:
-      '@unocss/astro': 66.2.3(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-      '@unocss/cli': 66.2.3
-      '@unocss/core': 66.2.3
-      '@unocss/postcss': 66.2.3(postcss@8.5.6)
-      '@unocss/preset-attributify': 66.2.3
-      '@unocss/preset-icons': 66.2.3
-      '@unocss/preset-mini': 66.2.3
-      '@unocss/preset-tagify': 66.2.3
-      '@unocss/preset-typography': 66.2.3
-      '@unocss/preset-uno': 66.2.3
-      '@unocss/preset-web-fonts': 66.2.3
-      '@unocss/preset-wind': 66.2.3
-      '@unocss/preset-wind3': 66.2.3
-      '@unocss/preset-wind4': 66.2.3
-      '@unocss/transformer-attributify-jsx': 66.2.3
-      '@unocss/transformer-compile-class': 66.2.3
-      '@unocss/transformer-directives': 66.2.3
-      '@unocss/transformer-variant-group': 66.2.3
-      '@unocss/vite': 66.2.3(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-    optionalDependencies:
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - postcss
-      - supports-color
-      - vue
-
   unplugin-combine@1.2.1(esbuild@0.25.2)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(unplugin@1.16.1):
     optionalDependencies:
       esbuild: 0.25.2
       rollup: 4.35.0
       unplugin: 1.16.1
       vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
-
-  unplugin-combine@1.2.1(esbuild@0.25.2)(rollup@4.35.0)(unplugin@1.16.1)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)):
-    optionalDependencies:
-      esbuild: 0.25.2
-      rollup: 4.35.0
-      unplugin: 1.16.1
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
 
   unplugin-unused@0.5.1:
     dependencies:
@@ -12089,52 +12103,6 @@ snapshots:
       '@vue-macros/volar': 0.30.15(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
       unplugin: 1.16.1
       unplugin-combine: 1.2.1(esbuild@0.25.2)(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(rollup@4.35.0)(unplugin@1.16.1)
-      unplugin-vue-define-options: 1.5.5(vue@3.5.17(typescript@5.8.3))
-      vue: 3.5.17(typescript@5.8.3)
-    transitivePeerDependencies:
-      - '@rspack/core'
-      - '@vueuse/core'
-      - esbuild
-      - rolldown
-      - rollup
-      - typescript
-      - vite
-      - vue-tsc
-      - webpack
-
-  unplugin-vue-macros@2.14.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(esbuild@0.25.2)(rollup@4.35.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3)):
-    dependencies:
-      '@vue-macros/better-define': 1.11.4(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/boolean-prop': 0.5.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/chain-call': 0.4.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/common': 1.16.1(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/config': 0.6.1(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-emit': 0.5.4(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-models': 1.3.5(@vueuse/core@13.4.0(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-prop': 0.6.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-props': 4.0.6(@vue-macros/reactivity-transform@1.1.6(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-props-refs': 1.3.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-render': 1.6.6(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-slots': 1.2.6(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/define-stylex': 0.2.3(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/devtools': 0.4.1(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
-      '@vue-macros/export-expose': 0.3.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/export-props': 0.6.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/export-render': 0.3.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/hoist-static': 1.7.0(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/jsx-directive': 0.10.6(typescript@5.8.3)
-      '@vue-macros/named-template': 0.5.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/reactivity-transform': 1.1.6(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/script-lang': 0.2.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/setup-block': 0.4.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/setup-component': 0.18.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/setup-sfc': 0.18.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/short-bind': 1.1.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/short-emits': 1.6.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/short-vmodel': 1.5.5(vue@3.5.17(typescript@5.8.3))
-      '@vue-macros/volar': 0.30.15(typescript@5.8.3)(vue-tsc@3.0.0-beta.3(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
-      unplugin: 1.16.1
-      unplugin-combine: 1.2.1(esbuild@0.25.2)(rollup@4.35.0)(unplugin@1.16.1)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
       unplugin-vue-define-options: 1.5.5(vue@3.5.17(typescript@5.8.3))
       vue: 3.5.17(typescript@5.8.3)
     transitivePeerDependencies:
@@ -12243,10 +12211,6 @@ snapshots:
     dependencies:
       vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
 
-  vite-hot-client@2.0.4(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)):
-    dependencies:
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-
   vite-node@3.2.4(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0):
     dependencies:
       cac: 6.7.14
@@ -12284,22 +12248,6 @@ snapshots:
       - rollup
       - supports-color
 
-  vite-plugin-inspect@0.8.9(rollup@4.35.0)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)):
-    dependencies:
-      '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.4(rollup@4.35.0)
-      debug: 4.4.1
-      error-stack-parser-es: 0.1.5
-      fs-extra: 11.3.0
-      open: 10.1.0
-      perfect-debounce: 1.0.0
-      picocolors: 1.1.1
-      sirv: 3.0.1
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-
   vite-plugin-inspect@11.2.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)):
     dependencies:
       ansis: 3.17.0
@@ -12331,22 +12279,6 @@ snapshots:
       - supports-color
       - vue
 
-  vite-plugin-vue-devtools@7.7.7(rollup@4.35.0)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)):
-    dependencies:
-      '@vue/devtools-core': 7.7.7(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-      '@vue/devtools-kit': 7.7.7
-      '@vue/devtools-shared': 7.7.7
-      execa: 9.5.2
-      sirv: 3.0.1
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-      vite-plugin-inspect: 0.8.9(rollup@4.35.0)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
-      vite-plugin-vue-inspector: 5.3.1(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
-    transitivePeerDependencies:
-      - '@nuxt/kit'
-      - rollup
-      - supports-color
-      - vue
-
   vite-plugin-vue-inspector@5.3.1(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)):
     dependencies:
       '@babel/core': 7.26.10
@@ -12362,36 +12294,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-vue-inspector@5.3.1(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)):
-    dependencies:
-      '@babel/core': 7.26.10
-      '@babel/plugin-proposal-decorators': 7.25.9(@babel/core@7.26.10)
-      '@babel/plugin-syntax-import-attributes': 7.26.0(@babel/core@7.26.10)
-      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.26.10)
-      '@babel/plugin-transform-typescript': 7.27.0(@babel/core@7.26.10)
-      '@vue/babel-plugin-jsx': 1.4.0(@babel/core@7.26.10)
-      '@vue/compiler-dom': 3.5.17
-      kolorist: 1.8.0
-      magic-string: 0.30.17
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - supports-color
-
   vite-plugin-vue-layouts@0.11.0(rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3)):
     dependencies:
       debug: 4.4.1
       fast-glob: 3.3.3
       vite: rolldown-vite@7.0.3(@types/node@24.0.3)(esbuild@0.25.2)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0)
-      vue: 3.5.17(typescript@5.8.3)
-      vue-router: 4.5.1(vue@3.5.17(typescript@5.8.3))
-    transitivePeerDependencies:
-      - supports-color
-
-  vite-plugin-vue-layouts@0.11.0(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3)):
-    dependencies:
-      debug: 4.4.1
-      fast-glob: 3.3.3
-      vite: 6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
       vue: 3.5.17(typescript@5.8.3)
       vue-router: 4.5.1(vue@3.5.17(typescript@5.8.3))
     transitivePeerDependencies:
