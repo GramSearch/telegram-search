@@ -10,10 +10,11 @@ import { routes as generatedRoutes } from 'vue-router/auto-routes'
 import App from './App.vue'
 import en from './locales/en.json'
 import zhCN from './locales/zh-CN.json'
+
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
-import './styles/main.css'
 import 'vue-sonner/style.css'
+import './styles/main.css'
 
 const app = createApp(App)
 const pinia = createPinia()

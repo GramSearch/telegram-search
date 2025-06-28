@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { CoreRetrievalMessages } from '@tg-search/core'
 
+import { useWebsocketStore } from '@tg-search/stage-ui'
 import { useDebounce } from '@vueuse/core'
 import { ref, watch } from 'vue'
 
-import { useWebsocketStore } from '../store/useWebsocket'
 import MessageList from './messages/MessageList.vue'
 
 const props = defineProps<{
@@ -49,15 +49,15 @@ watch(keywordDebounced, (newKeyword) => {
 
 <template>
   <div v-if="isOpen" class="flex items-center justify-center" @keydown.esc="isOpen = false">
-    <div class="w-[45%] bg-card rounded-xl shadow-lg">
+    <div class="bg-card w-[45%] rounded-xl shadow-lg">
       <!-- 搜索输入框 -->
-      <div class="px-4 py-3 border-b flex items-center gap-2">
+      <div class="flex items-center gap-2 border-b px-4 py-3">
         <input
           v-model="keyword"
-          class="w-full outline-none text-foreground"
+          class="text-foreground w-full outline-none"
         >
         <button
-          class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
+          class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
           @click="showSettings = !showSettings"
         >
           <span class="i-lucide-chevron-down h-4 w-4 transition-transform" :class="{ 'rotate-180': showSettings }" />
@@ -65,28 +65,28 @@ watch(keywordDebounced, (newKeyword) => {
       </div>
 
       <!-- 设置栏 -->
-      <div v-if="showSettings" class="px-4 py-3 border-b">
+      <div v-if="showSettings" class="border-b px-4 py-3">
         <slot name="settings" />
       </div>
 
       <!-- 搜索结果 -->
       <div
         v-show="keywordDebounced"
-        class="p-4 min-h-[200px] transition-all duration-300 ease-in-out"
+        class="min-h-[200px] p-4 transition-all duration-300 ease-in-out"
         :class="{ 'opacity-0': !keywordDebounced, 'opacity-100': keywordDebounced }"
       >
         <template v-if="searchResult.length > 0">
           <MessageList :messages="searchResult" :keyword="keyword" />
         </template>
         <template v-else-if="isLoading">
-          <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
-            <span class="i-lucide-loader-circle text-3xl mb-2 animate-spin" />
+          <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+            <span class="i-lucide-loader-circle mb-2 animate-spin text-3xl" />
             <span>搜索中...</span>
           </div>
         </template>
         <template v-else-if="searchResult.length === 0">
-          <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
-            <span class="i-lucide-search text-3xl mb-2" />
+          <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+            <span class="i-lucide-search mb-2 text-3xl" />
             <span>没有找到相关消息</span>
           </div>
         </template>

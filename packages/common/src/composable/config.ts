@@ -2,6 +2,7 @@ import type { Config } from '../helper/config-schema'
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
+
 import defu from 'defu'
 import { join } from 'pathe'
 import { safeParse } from 'valibot'

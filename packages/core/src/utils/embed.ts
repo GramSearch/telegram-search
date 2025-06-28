@@ -21,7 +21,7 @@ export async function embedContents(contents: string[]) {
       })
       break
     case EmbeddingProvider.OLLAMA: {
-      const ollama = createOllama()
+      const ollama = createOllama(embeddingConfig.apiBase)
       embeddings = await embedMany({
         ...ollama.chat(embeddingConfig.model),
         input: contents,

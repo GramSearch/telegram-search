@@ -1,4 +1,5 @@
 import type { Config } from '@tg-search/common'
+
 import type { CoreContext } from '../context'
 
 import { configSchema } from '@tg-search/common'

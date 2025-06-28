@@ -1,36 +1,34 @@
 {
   "name": "@tg-search/server",
   "type": "module",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.14",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
   "scripts": {
     "serve": "vite-node src/index.ts",
     "dev": "vite-node src/index.ts",
-    "build": "unbuild",
-    "stub": "unbuild --stub",
+    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tg-search/common": "workspace:*",
     "@tg-search/core": "workspace:*",
-    "crossws": "^0.3.5",
-    "es-toolkit": "^1.38.0",
+    "crossws": "0.3.5",
+    "es-toolkit": "^1.39.4",
     "h3": "^1.15.3",
     "listhen": "^1.9.0",
-    "tsx": "^4.19.4",
-    "vite-node": "^3.1.4",
+    "tsx": "^4.20.3",
+    "vite-node": "^3.2.4",
     "web-streams-polyfill": "^4.1.0"
   }
 }

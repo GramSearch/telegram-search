@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { CoreDialog } from '@tg-search/core'
 
+import { usePagination } from '@tg-search/stage-ui'
 import { computed, ref, watch } from 'vue'
 
-import { usePagination } from '../composables/usePagination'
 import Pagination from './ui/Pagination.vue'
 import SelectDropdown from './ui/SelectDropdown.vue'
 
@@ -107,7 +107,7 @@ watch([selectedType, searchQuery], () => {
         <input
           v-model="searchQuery"
           type="text"
-          class="w-full border border-secondary rounded-md bg-muted px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
+          class="border-secondary bg-muted w-full border rounded-md px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
           placeholder="Search"
         >
       </div>
@@ -118,7 +118,7 @@ watch([selectedType, searchQuery], () => {
       <button
         v-for="chat in paginatedChats"
         :key="chat.id"
-        class="relative w-full flex active:scale-98 cursor-pointer items-center border rounded-lg p-4 text-left transition-all duration-300 space-x-3 hover:shadow-md hover:-translate-y-0.5"
+        class="relative w-full flex cursor-pointer items-center border rounded-lg p-4 text-left transition-all duration-300 active:scale-98 space-x-3 hover:shadow-md hover:-translate-y-0.5"
         :class="{
           'border-primary border-1 shadow-md scale-102': isSelected(chat.id),
           'border-secondary hover:border-primary': !isSelected(chat.id),
@@ -133,7 +133,7 @@ watch([selectedType, searchQuery], () => {
                 <div class="i-lucide-circle-check h-4 w-4" />
               </span>
             </p>
-            <p class="truncate text-sm text-secondary-foreground">
+            <p class="text-secondary-foreground truncate text-sm">
               {{ chat.subtitle }}
             </p>
           </div>
@@ -150,7 +150,7 @@ watch([selectedType, searchQuery], () => {
     />
 
     <!-- No Results Message -->
-    <div v-if="filteredChats.length === 0" class="py-8 text-center text-secondary-foreground">
+    <div v-if="filteredChats.length === 0" class="text-secondary-foreground py-8 text-center">
       No chats found
     </div>
   </div>

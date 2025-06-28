@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-start gap-4 rounded-lg p-3 transition-all duration-200 hover:bg-muted">
+  <div class="hover:bg-muted flex items-start gap-4 rounded-lg p-3 transition-all duration-200">
     <div class="mt-1">
       <Avatar
         :name="message.fromName"
@@ -18,8 +18,8 @@ defineProps<{
     </div>
     <div class="flex-1">
       <div class="mb-1 flex items-center gap-2">
-        <span class="font-medium text-primary whitespace-nowrap">{{ message.fromName }}</span>
-        <span class="text-xs text-secondary-foreground whitespace-nowrap">{{ message.createdAt }}</span>
+        <span class="whitespace-nowrap text-primary font-medium">{{ message.fromName }}</span>
+        <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ message.createdAt }}</span>
       </div>
       <div class="text-foreground">
         {{ message.content }}

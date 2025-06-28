@@ -21,15 +21,16 @@ const sizeMap = {
 
 const avatarSize = computed(() => sizeMap[props.size])
 
+const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'grapheme' })
+
 const initials = computed(() => {
   if (!props.name)
     return ''
-  return props.name
-    .split(' ')
-    .map(word => word[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 1)
+  const segment = segmenter.segment(props.name)[Symbol.iterator]().next().value
+  if (segment) {
+    return segment.segment.toUpperCase()
+  }
+  return ''
 })
 
 const backgroundColor = computed(() => {
@@ -57,7 +58,7 @@ const backgroundColor = computed(() => {
 <template>
   <div class="relative inline-block">
     <div
-      class="relative rounded-full overflow-hidden flex items-center justify-center text-white font-medium" :class="[
+      class="relative flex items-center justify-center overflow-hidden rounded-full text-white font-medium" :class="[
         avatarSize,
         backgroundColor,
       ]"
@@ -72,7 +73,7 @@ const backgroundColor = computed(() => {
     </div>
     <div
       v-if="isOnline"
-      class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background bg-green-500"
+      class="border-background absolute bottom-0 right-0 h-3 w-3 border-2 rounded-full bg-green-500"
     />
   </div>
 </template>

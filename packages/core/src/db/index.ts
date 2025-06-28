@@ -18,9 +18,9 @@ interface BaseDB {
   execute: (query: any) => Promise<any>
 }
 
-export type CoreDB =
-  | (PostgresJsDatabase<Record<string, unknown>> & { $client: ReturnType<typeof postgres> } & BaseDB)
-  | (PgliteDatabase<Record<string, unknown>> & { $client: PGlite } & BaseDB)
+export type CoreDB
+  = | (PostgresJsDatabase<Record<string, unknown>> & { $client: ReturnType<typeof postgres> } & BaseDB)
+    | (PgliteDatabase<Record<string, unknown>> & { $client: PGlite } & BaseDB)
 
 let dbInstance: CoreDB
 

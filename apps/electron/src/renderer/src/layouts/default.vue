@@ -1,24 +1,28 @@
 <script lang="ts" setup>
 import type { DialogType } from '@tg-search/core'
 
-import { useDark } from '@vueuse/core'
+import { useAuthStore, useChatStore, useSettingsStore, useWebsocketStore } from '@tg-search/stage-ui'
+import { useDark, useLocalStorage } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute, useRouter } from 'vue-router'
 
 import ChatsCollapse from '../components/layout/ChatsCollapse.vue'
 import SettingsDialog from '../components/layout/SettingsDialog.vue'
 import SidebarSelector from '../components/layout/SidebarSelector.vue'
+import Avatar from '../components/ui/Avatar.vue'
 import { Button } from '../components/ui/Button'
-import { useChatStore } from '../store/useChat'
-import { useSettingsStore } from '../store/useSettings'
-import { useWebsocketStore } from '../store/useWebsocket'
 
 const settingsStore = useSettingsStore()
 const { theme } = storeToRefs(settingsStore)
 const isDark = useDark()
 
 const websocketStore = useWebsocketStore()
+const authStore = useAuthStore()
+const { isLoggedIn } = storeToRefs(authStore)
+
+const router = useRouter()
+const route = useRoute()
 
 const settingsDialog = ref(false)
 const searchParams = ref('')
@@ -30,7 +34,17 @@ const chatsFiltered = computed(() => {
 })
 
 type ChatGroup = DialogType | ''
-const activeChatGroup = ref<ChatGroup>('user')
+const selectedGroup = useLocalStorage<ChatGroup>('selectedGroup', 'user')
+
+const activeChatGroup = computed(() => {
+  if (route.params.chatId) {
+    const currentChat = chatStore.getChat(route.params.chatId.toString())
+    if (currentChat) {
+      return currentChat.type
+    }
+  }
+  return selectedGroup.value
+})
 
 watch(theme, (newTheme) => {
   document.documentElement.setAttribute('data-theme', newTheme)
@@ -41,26 +55,42 @@ function toggleSettingsDialog() {
 }
 
 function toggleActiveChatGroup(group: ChatGroup) {
-  if (activeChatGroup.value === group)
-    activeChatGroup.value = 'user'
-  else
-    activeChatGroup.value = group
+  selectedGroup.value = group
 }
 </script>
 
 <template>
   <div
-    class="h-screen w-full flex overflow-hidden bg-background text-sm font-medium"
+    class="bg-background h-screen w-full flex overflow-hidden text-sm font-medium"
   >
-    <div class="w-[20%] md:w-[15%] flex flex-col h-dvh border-r border-r-secondary">
+    <!-- Login prompt banner -->
+    <div
+      v-if="!isLoggedIn"
+      class="fixed left-0 right-0 top-0 z-50 bg-yellow-500 px-4 py-2 text-center text-sm text-yellow-900 font-medium"
+    >
+      <div class="flex items-center justify-center gap-2">
+        <div class="i-lucide-alert-triangle" />
+        <span>请先登录 Telegram 账号以使用完整功能</span>
+        <Button
+          size="sm"
+          icon="i-lucide-user"
+          class="ml-2 border border-yellow-700 bg-yellow-600 text-yellow-100 hover:bg-yellow-700"
+          @click="router.push('/login')"
+        >
+          去登录
+        </Button>
+      </div>
+    </div>
+
+    <div class="border-r-secondary w-[20%] flex flex-col border-r h-dvh md:w-[15%]">
       <div class="relative p-4">
         <div
-          class="i-lucide-search absolute left-7 top-1/2 -translate-y-1/2 h-4 w-4"
+          class="i-lucide-search absolute left-7 top-1/2 h-4 w-4 -translate-y-1/2"
         />
         <input
           v-model="searchParams"
           type="text"
-          class="w-full border border-secondary rounded-md bg-muted px-3 py-2 pl-9  ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:border-secondary dark:bg-muted"
+          class="border-secondary bg-muted ring-offset-background focus:ring-ring placeholder:text-muted-foreground dark:bg-muted dark:border-secondary w-full border rounded-md px-3 py-2 pl-9 focus:outline-none focus:ring-2"
           placeholder="Search"
         >
       </div>
@@ -91,9 +121,9 @@ function toggleActiveChatGroup(group: ChatGroup) {
         />
       </div>
 
-      <div class="pt-4 flex-1 overflow-y-auto flex flex-col justify-start h-full border-t border-t-secondary">
+      <div class="border-t-secondary h-full flex flex-1 flex-col justify-start overflow-y-auto border-t pt-4">
         <ChatsCollapse
-          class="flex flex-col max-h-[85%]"
+          class="max-h-[85%] flex flex-col"
           :class="{ 'flex-1': activeChatGroup === 'user' }"
           name="用户"
           icon="i-lucide-user"
@@ -104,7 +134,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         />
 
         <ChatsCollapse
-          class="flex flex-col max-h-[85%]"
+          class="max-h-[85%] flex flex-col"
           :class="{ 'flex-1': activeChatGroup === 'group' }"
           name="群组"
           icon="i-lucide-users"
@@ -115,7 +145,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         />
 
         <ChatsCollapse
-          class="flex flex-col max-h-[85%]"
+          class="max-h-[85%] flex flex-col"
           :class="{ 'flex-1': activeChatGroup === 'channel' }"
           name="频道"
           icon="i-lucide-message-circle"
@@ -127,28 +157,28 @@ function toggleActiveChatGroup(group: ChatGroup) {
       </div>
 
       <div class="flex items-center justify-between p-4">
-        <div class="flex items-center gap-3 mr-3">
-          <div class="h-8 w-8 flex items-center justify-center overflow-hidden rounded-full bg-muted">
+        <div class="mr-3 flex items-center gap-3">
+          <div class="bg-muted h-8 w-8 flex items-center justify-center overflow-hidden rounded-full">
             <Avatar
               :name="websocketStore.getActiveSession()?.me?.username"
               size="sm"
             />
           </div>
           <div class="flex flex-col">
-            <span class="text-sm text-foreground font-medium whitespace-nowrap">{{ websocketStore.getActiveSession()?.me?.username }}</span>
-            <span class="text-xs text-secondary-foreground whitespace-nowrap">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
+            <span class="text-foreground whitespace-nowrap text-sm font-medium">{{ websocketStore.getActiveSession()?.me?.username }}</span>
+            <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
           </div>
         </div>
         <div class="flex items-center">
           <Button
             :icon="isDark ? 'i-lucide-sun' : 'i-lucide-moon'"
-            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
+            class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
             @click="() => { isDark = !isDark }"
           />
 
           <Button
             icon="i-lucide-settings"
-            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
+            class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
             @click="toggleSettingsDialog"
           />
         </div>

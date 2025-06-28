@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import { useAuthStore, useChatStore, useSyncTaskStore, useWebsocketStore } from '@tg-search/stage-ui'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 
 import ChatSelector from '../components/ChatSelector.vue'
 import { Button } from '../components/ui/Button'
-import { useChatStore } from '../store/useChat'
-import { useAuthStore } from '../store/useAuth'
-import { useSyncTaskStore } from '../store/useSyncTask'
-import { useWebsocketStore } from '../store/useWebsocket'
+import { Switch } from '../components/ui/Switch'
 
 const selectedChats = ref<number[]>([])
 
@@ -19,7 +17,7 @@ const websocketStore = useWebsocketStore()
 const chatsStore = useChatStore()
 const { chats } = storeToRefs(chatsStore)
 
-const { currentTask, currentTaskProgress } = storeToRefs(useSyncTaskStore())
+const { currentTask, currentTaskProgress, increase } = storeToRefs(useSyncTaskStore())
 const loadingToast = ref<string | number>()
 
 // 计算属性判断按钮是否应该禁用
@@ -32,6 +30,7 @@ const isButtonDisabled = computed(() => {
 function handleSync() {
   websocketStore.sendEvent('takeout:run', {
     chatIds: selectedChats.value.map(id => id.toString()),
+    increase: increase.value,
   })
 
   loadingToast.value = toast.loading('开始同步...')
@@ -71,7 +70,7 @@ watch(currentTaskProgress, (progress) => {
 </script>
 
 <template>
-  <header class="flex items-center border-b border-b-secondary px-4 dark:border-b-secondary p-4">
+  <header class="border-b-secondary dark:border-b-secondary flex items-center border-b p-4 px-4">
     <div class="flex items-center gap-2">
       <span class="text-lg font-medium">Sync</span>
     </div>
@@ -89,11 +88,17 @@ watch(currentTaskProgress, (progress) => {
 
   <div class="p-6">
     <div class="flex items-center justify-between">
-      <h3 class="text-lg text-foreground font-medium">
+      <h3 class="text-foreground text-lg font-medium">
         选择要同步的聊天
       </h3>
       <div class="flex items-center gap-2">
-        <span class="text-sm text-secondary-foreground">
+        <div>
+          <Switch
+            v-model="increase"
+            label="增量同步"
+          />
+        </div>
+        <span class="text-secondary-foreground text-sm">
           已选择 {{ selectedChats.length }} 个聊天
         </span>
       </div>
