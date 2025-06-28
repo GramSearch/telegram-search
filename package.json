@@ -4,14 +4,13 @@
   "version": "1.0.0-beta.14",
   "private": true,
   "packageManager": "pnpm@10.12.2",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
-    "build": "pnpm -r build",
-    "stub": "pnpm -r stub",
-    "packages:build": "pnpm -rF=\"./packages/*\" build",
-    "build:server": "pnpm -F @tg-search/server build",
-    "dev:server": "pnpm run packages:build && pnpm -F @tg-search/server dev",
-    "dev:frontend": "pnpm run build:server && pnpm -F @tg-search/frontend dev",
-    "dev:electron": "pnpm run build:server && pnpm -F @tg-search/electron dev",
+    "dev:server": "pnpm -F @tg-search/server dev",
+    "dev:frontend": "pnpm -F @tg-search/frontend dev",
+    "dev:electron": "pnpm -F @tg-search/electron dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "pnpm -r --parallel typecheck",
@@ -30,10 +29,10 @@
     "drizzle-kit": "^0.31.1",
     "eslint": "^9.29.0",
     "taze": "^19.1.0",
-    "tsdown": "^0.12.8",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "unocss": "^66.2.3",
+    "unplugin-unused": "^0.5.1",
     "vite": "npm:rolldown-vite@latest",
     "vitest": "^3.2.4"
   }
