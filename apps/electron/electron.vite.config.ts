@@ -2,13 +2,12 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
 import Vue from '@vitejs/plugin-vue'
-import { externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { dirname, resolve } from 'pathe'
 import UnoCSS from 'unocss/vite'
 import Unused from 'unplugin-unused/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
-import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import Devtools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
@@ -18,6 +17,8 @@ const alias = {
   '@tg-search/server': resolve('../../apps/server/src'),
   '@tg-search/common': resolve('../../packages/common/src'),
   '@tg-search/core': resolve('../../packages/core/src'),
+  '@tg-search/stage': resolve('../../packages/stage/src'),
+  '@tg-search/stage-ui': resolve('../../packages/stage-ui/src'),
 }
 
 export default defineConfig({
