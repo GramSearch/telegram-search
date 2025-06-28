@@ -34,8 +34,8 @@ export interface CoreMessage {
 }
 
 export interface CoreMessageMedia {
-  apiMedia: Api.TypeMessageMedia
-  media: string | Buffer<ArrayBufferLike> | undefined
+  // apiMedia: Api.TypeMessageMedia
+  data: string | Buffer<ArrayBufferLike> | undefined
 }
 
 export interface CoreMessageReply {
@@ -113,8 +113,8 @@ export function convertToCoreMessage(message: Api.Message): Result<CoreMessage> 
   const media: CoreMessageMedia[] = []
   if (message.media) {
     media.push({
-      apiMedia: message.media,
-      media: undefined,
+      // apiMedia: message.media,
+      data: undefined,
     })
   }
 
