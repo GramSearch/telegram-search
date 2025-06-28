@@ -34,11 +34,11 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
 
       const resolvedMessages = await Promise.all(
         opts.messages.map(async (message) => {
-          if (!message.media)
+          if (!message.medias)
             return message
 
           const fetchedMedias = await Promise.all(
-            message.media.map(async (media) => {
+            message.medias.map(async (media) => {
               logger.withFields({ media }).debug('Media')
 
               const userMediaPath = join(await useUserMediaPath(), message.chatId.toString())
@@ -57,14 +57,14 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
 
               return {
                 apiMedia: media.apiMedia,
-                media: mediaFetched,
+                data: mediaFetched,
               }
             }),
           )
 
           return {
             ...message,
-            media: fetchedMedias,
+            medias: fetchedMedias,
           } satisfies CoreMessage
         }),
       )
