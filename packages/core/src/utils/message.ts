@@ -34,7 +34,7 @@ export interface CoreMessage {
 }
 
 export interface CoreMessageMedia {
-  apiMedia: Api.TypeMessageMedia
+  apiMedia: unknown // Api.TypeMessageMedia
   data: string | Buffer<ArrayBufferLike> | undefined
 }
 

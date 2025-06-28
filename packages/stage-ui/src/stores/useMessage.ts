@@ -1,4 +1,4 @@
-import type { CoreMessage, CorePagination } from '@tg-search/core'
+import type { CoreMessage, CorePagination } from '@tg-search/core/types'
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'

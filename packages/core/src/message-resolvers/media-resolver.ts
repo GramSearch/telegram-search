@@ -1,3 +1,5 @@
+import type { Api } from 'telegram'
+
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
 import type { CoreMessage } from '../utils/message'
@@ -46,7 +48,7 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
                 mkdirSync(userMediaPath, { recursive: true })
               }
 
-              const mediaFetched = await ctx.getClient().downloadMedia(media.apiMedia)
+              const mediaFetched = await ctx.getClient().downloadMedia(media.apiMedia as Api.TypeMessageMedia)
 
               const mediaPath = join(userMediaPath, message.platformMessageId)
               logger.withFields({ mediaPath }).verbose('Media path')

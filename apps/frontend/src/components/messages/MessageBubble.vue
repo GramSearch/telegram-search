@@ -23,7 +23,7 @@ defineProps<{
       </div>
 
       <div class="text-foreground">
-        <template v-if="message.media">
+        <template v-if="message.medias?.length === 0">
           {{ message.content }}
         </template>
         <template v-else>
