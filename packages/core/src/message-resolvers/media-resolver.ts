@@ -1,4 +1,3 @@
-import type { Api } from 'telegram'
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
 import type { CoreMessage } from '../utils/message'
@@ -7,6 +6,7 @@ import { Buffer } from 'node:buffer'
 import { existsSync, mkdirSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+
 import { useLogger } from '@tg-search/common'
 import { getMediaPath, useConfig } from '@tg-search/common/composable'
 
