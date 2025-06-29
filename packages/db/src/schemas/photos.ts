@@ -1,12 +1,23 @@
-// https://github.com/moeru-ai/airi/blob/main/services/telegram-bot/src/db/schema.ts
+import type { Buffer } from 'node:buffer'
 
-import { bigint, index, pgTable, text, uuid, vector } from 'drizzle-orm/pg-core'
+// https://github.com/moeru-ai/airi/blob/main/services/telegram-bot/src/db/schema.ts
+import { bigint, customType, index, pgTable, text, uuid, vector } from 'drizzle-orm/pg-core'
+
+const bytea = customType<{
+  data: Buffer
+  default: false
+}>({
+  dataType() {
+    return 'bytea'
+  },
+})
 
 export const photosTable = pgTable('photos', {
   id: uuid().primaryKey().defaultRandom(),
   platform: text().notNull().default(''),
   file_id: text().notNull().default(''),
-  image_base64: text().notNull().default(''),
+  message_id: uuid(),
+  image_bytes: bytea(),
   image_path: text().notNull().default(''),
   caption: text().notNull().default(''),
   description: text().notNull().default(''),
@@ -19,4 +30,5 @@ export const photosTable = pgTable('photos', {
   index('photos_description_vector_1536_index').using('hnsw', table.description_vector_1536.op('vector_cosine_ops')),
   index('photos_description_vector_1024_index').using('hnsw', table.description_vector_1024.op('vector_cosine_ops')),
   index('photos_description_vector_768_index').using('hnsw', table.description_vector_768.op('vector_cosine_ops')),
+  index('photos_message_id_index').on(table.message_id),
 ])

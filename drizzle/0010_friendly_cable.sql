@@ -1,0 +1,1 @@
+ALTER TABLE "photos" DROP COLUMN "image_base64";

@@ -1,0 +1,1 @@
+ALTER TABLE "photos" ADD COLUMN "image_bytes" "bytea";

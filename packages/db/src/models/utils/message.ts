@@ -16,7 +16,7 @@ export function convertToCoreMessageFromDB(message: DBSelectMessage): CoreMessag
   return {
     uuid: message.id as UUID,
 
-    platform: message.platform,
+    platform: message.platform as 'telegram',
     platformMessageId: message.platform_message_id,
     chatId: message.in_chat_id,
 

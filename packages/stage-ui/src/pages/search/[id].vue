@@ -47,7 +47,7 @@ watch(keywordDebounced, (newKeyword) => {
 
 <template>
   <div class="h-full flex flex-col">
-    <header class="flex items-center border-b border-b-secondary p-4 px-4 dark:border-b-secondary">
+    <header class="flex items-center border-b border-b-neutral-200 p-4 px-4 dark:border-b-neutral-200">
       <div class="flex items-center gap-2">
         <span class="text-lg font-medium">Search</span>
       </div>
@@ -58,11 +58,11 @@ watch(keywordDebounced, (newKeyword) => {
       <div class="w-full flex items-center gap-2">
         <input
           v-model="keyword"
-          class="flex-1 border border-secondary rounded-md px-4 py-2 text-foreground outline-none"
+          class="flex-1 border border-neutral-200 rounded-md px-4 py-2 text-primary-900 outline-none"
           placeholder="Search messages..."
         >
         <button
-          class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
+          class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-primary-900 hover:bg-neutral-100"
           @click="showSettings = !showSettings"
         >
           <span class="i-lucide-chevron-down h-4 w-4 transition-transform" :class="{ 'rotate-180': showSettings }" />
@@ -85,13 +85,13 @@ watch(keywordDebounced, (newKeyword) => {
         <MessageList :messages="searchResult" :keyword="keyword" />
       </template>
       <template v-else-if="isLoading">
-        <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
+        <div class="flex flex-col items-center justify-center py-12 text-complementary-500 opacity-70">
           <span class="i-lucide-loader-circle mb-2 animate-spin text-3xl" />
           <span>搜索中...</span>
         </div>
       </template>
       <template v-else-if="searchResult.length === 0">
-        <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
+        <div class="flex flex-col items-center justify-center py-12 text-complementary-500 opacity-70">
           <span class="i-lucide-search mb-2 text-3xl" />
           <span>没有找到相关消息</span>
         </div>

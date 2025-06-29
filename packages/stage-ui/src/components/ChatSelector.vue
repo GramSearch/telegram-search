@@ -107,7 +107,7 @@ watch([selectedType, searchQuery], () => {
         <input
           v-model="searchQuery"
           type="text"
-          class="w-full border border-secondary rounded-md bg-muted px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
+          class="w-full border border-neutral-200 rounded-md bg-neutral-100 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
           placeholder="Search"
         >
       </div>
@@ -121,7 +121,7 @@ watch([selectedType, searchQuery], () => {
         class="relative w-full flex cursor-pointer items-center border rounded-lg p-4 text-left transition-all duration-300 active:scale-98 space-x-3 hover:shadow-md hover:-translate-y-0.5"
         :class="{
           'border-primary border-1 shadow-md scale-102': isSelected(chat.id),
-          'border-secondary hover:border-primary': !isSelected(chat.id),
+          'border-neutral-200 hover:border-primary': !isSelected(chat.id),
         }"
         @click="toggleSelection(chat.id)"
       >
@@ -133,7 +133,7 @@ watch([selectedType, searchQuery], () => {
                 <div class="i-lucide-circle-check h-4 w-4" />
               </span>
             </p>
-            <p class="truncate text-sm text-secondary-foreground">
+            <p class="truncate text-sm text-complementary-600">
               {{ chat.subtitle }}
             </p>
           </div>
@@ -150,7 +150,7 @@ watch([selectedType, searchQuery], () => {
     />
 
     <!-- No Results Message -->
-    <div v-if="filteredChats.length === 0" class="py-8 text-center text-secondary-foreground">
+    <div v-if="filteredChats.length === 0" class="py-8 text-center text-complementary-600">
       No chats found
     </div>
   </div>
