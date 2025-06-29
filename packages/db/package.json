@@ -10,11 +10,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@electric-sql/pglite": "^0.3.3",
+    "@electric-sql/pglite": "^0.3.4",
     "@node-rs/jieba": "^2.0.1",
     "@tg-search/common": "workspace:*",
     "drizzle-orm": "^0.44.2",
-    "pg": "^8.16.2",
+    "pg": "^8.16.3",
     "postgres": "^3.4.7"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0-beta.14",
   "private": true,
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.4",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -24,14 +24,14 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.1",
     "@proj-airi/unocss-preset-chromatic": "^0.0.3",
-    "@types/node": "^24.0.3",
+    "@types/node": "^24.0.7",
     "bumpp": "^10.2.0",
-    "drizzle-kit": "^0.31.1",
-    "eslint": "^9.29.0",
+    "drizzle-kit": "^0.31.4",
+    "eslint": "^9.30.0",
     "taze": "^19.1.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
-    "unocss": "^66.2.3",
+    "unocss": "^66.3.2",
     "unplugin-unused": "^0.5.1",
     "vite": "npm:rolldown-vite@latest",
     "vitest": "^3.2.4"

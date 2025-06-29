@@ -2,7 +2,7 @@
   "name": "@tg-search/stage",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.12.4",
   "exports": {
     ".": "./src/index.ts"
   },
@@ -14,13 +14,13 @@
     "@tg-search/core": "workspace:*",
     "@tg-search/server": "workspace:*",
     "@vueuse/core": "^13.4.0",
-    "culori": "^4.0.1",
+    "culori": "^4.0.2",
     "defu": "^6.1.4",
     "ofetch": "^1.4.1",
     "pinia": "^3.0.3",
     "uuid": "^11.1.0",
     "vue": "^3.5.17",
-    "vue-sonner": "^2.0.0"
+    "vue-sonner": "^2.0.1"
   },
   "devDependencies": {
     "@types/culori": "^4.0.0"

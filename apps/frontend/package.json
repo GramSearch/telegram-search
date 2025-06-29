@@ -2,7 +2,7 @@
   "name": "@tg-search/frontend",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.4",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333",
@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
-    "@iconify-json/lucide": "^1.2.51",
+    "@iconify-json/lucide": "^1.2.53",
     "@iconify/vue": "^5.0.0",
-    "@tanstack/vue-query": "^5.81.2",
+    "@tanstack/vue-query": "^5.81.5",
     "@tanstack/vue-table": "^8.21.3",
     "@tg-search/core": "workspace:^",
     "@tg-search/stage": "workspace:^",
@@ -29,20 +29,20 @@
     "vue": "^3.5.17",
     "vue-i18n": "^11.1.7",
     "vue-router": "^4.5.1",
-    "vue-sonner": "^2.0.0"
+    "vue-sonner": "^2.0.1"
   },
   "devDependencies": {
-    "@unocss/eslint-config": "^66.2.3",
-    "@unocss/eslint-plugin": "^66.2.3",
-    "@unocss/reset": "^66.2.3",
-    "@vitejs/plugin-vue": "^5.2.4",
-    "@vue-macros/volar": "^3.0.0-beta.14",
-    "unocss": "^66.2.3",
+    "@unocss/eslint-config": "^66.3.2",
+    "@unocss/eslint-plugin": "^66.3.2",
+    "@unocss/reset": "^66.3.2",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue-macros/volar": "^3.0.0-beta.15",
+    "unocss": "^66.3.2",
     "unplugin-vue-macros": "^2.14.5",
-    "unplugin-vue-router": "^0.12.0",
-    "vite-plugin-inspect": "^11.2.0",
+    "unplugin-vue-router": "^0.13.0",
+    "vite-plugin-inspect": "^11.3.0",
     "vite-plugin-vue-devtools": "^7.7.7",
     "vite-plugin-vue-layouts": "^0.11.0",
-    "vue-tsc": "^3.0.0-beta.3"
+    "vue-tsc": "^3.0.0-beta.5"
   }
 }
