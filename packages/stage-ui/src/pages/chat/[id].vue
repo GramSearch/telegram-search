@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { CorePagination } from '@tg-search/common/utils/pagination'
 import type { CoreDialog, CoreMessage } from '@tg-search/core/types'
 
 import { useChatStore, useMessageStore, useWebsocketStore } from '@tg-search/stage'
@@ -69,6 +70,12 @@ const messageInput = ref('')
 const { y } = useScroll(containerProps.ref)
 const lastMessagePosition = ref(0)
 
+async function fetchMessages(pagination: CorePagination) {
+  isLoadingMessages.value = true
+  await messageStore.fetchMessagesWithDatabase(id.toString(), pagination)
+  isLoadingMessages.value = false
+}
+
 watch(chatMessages, () => {
   lastMessagePosition.value = containerProps.ref.value?.scrollHeight ?? 0
 
@@ -81,11 +88,7 @@ watch(chatMessages, () => {
 // TODO: useInfiniteScroll?
 watch(y, async () => {
   if (y.value === 0 && !isLoadingMessages.value) {
-    isLoadingMessages.value = true
-
-    await messageStore.fetchMessagesWithDatabase(id.toString(), { offset: messageOffset.value, limit: messageLimit.value })
-
-    isLoadingMessages.value = false
+    fetchMessages({ offset: messageOffset.value, limit: messageLimit.value })
   }
 }, { immediate: true })
 
@@ -103,6 +106,11 @@ function sendMessage() {
 }
 
 const isGlobalSearchOpen = ref(false)
+
+function handleGotoMessage(message: CoreMessage) {
+  const offset = Number(message.platformMessageId) - (messageLimit.value / 2)
+  fetchMessages({ offset, limit: messageLimit.value })
+}
 </script>
 
 <template>
@@ -158,6 +166,7 @@ const isGlobalSearchOpen = ref(false)
         v-model:open="isGlobalSearchOpen"
         :chat-id="id.toString()"
         class="absolute left-0 top-[20%] w-full"
+        @goto-message="handleGotoMessage"
       >
         <template #settings>
           <div class="flex items-center">

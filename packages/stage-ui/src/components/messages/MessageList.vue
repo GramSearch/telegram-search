@@ -9,6 +9,10 @@ const props = defineProps<{
   keyword: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'goto-message', message: CoreMessage): void
+}>()
+
 const hoveredMessage = ref<CoreMessage | null>(null)
 const { copy, copied } = useClipboard()
 
@@ -22,6 +26,10 @@ function highlightKeyword(text: string, keyword: string) {
 function copyMessageLink(message: CoreMessage) {
   copy(`https://t.me/c/${message.chatId}/${message.platformMessageId}`)
 }
+
+function handleGoToMessage(message: CoreMessage) {
+  emit('goto-message', message)
+}
 </script>
 
 <template>
@@ -29,7 +37,7 @@ function copyMessageLink(message: CoreMessage) {
     <li
       v-for="item in props.messages"
       :key="item.uuid"
-      class="group animate-slide-in hover:bg-muted/50 relative flex cursor-pointer items-center gap-2 border-b p-2 transition-all duration-200 ease-in-out last:border-b-0"
+      class="animate-slide-in group relative flex cursor-pointer items-center gap-2 border-b p-2 transition-all duration-200 ease-in-out last:border-b-0 hover:bg-muted/50"
       tabindex="0"
       @mouseenter="hoveredMessage = item"
       @mouseleave="hoveredMessage = null"

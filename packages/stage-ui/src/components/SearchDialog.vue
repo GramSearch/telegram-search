@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CoreRetrievalMessages } from '@tg-search/core/types'
+import type { CoreMessage, CoreRetrievalMessages } from '@tg-search/core/types'
 
 import { useWebsocketStore } from '@tg-search/stage'
 import { useDebounce } from '@vueuse/core'
@@ -9,6 +9,10 @@ import MessageList from './messages/MessageList.vue'
 
 const props = defineProps<{
   chatId?: string
+}>()
+
+const emit = defineEmits<{
+  (e: 'goto-message', message: CoreMessage): void
 }>()
 
 const isOpen = defineModel<boolean>('open', { required: true })
@@ -76,7 +80,11 @@ watch(keywordDebounced, (newKeyword) => {
         :class="{ 'opacity-0': !keywordDebounced, 'opacity-100': keywordDebounced }"
       >
         <template v-if="searchResult.length > 0">
-          <MessageList :messages="searchResult" :keyword="keyword" />
+          <MessageList
+            :messages="searchResult"
+            :keyword="keyword"
+            @goto-message="emit('goto-message', $event)"
+          />
         </template>
         <template v-else-if="isLoading">
           <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">

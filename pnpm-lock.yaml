@@ -473,6 +473,9 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.21.3
         version: 8.21.3(vue@3.5.17(typescript@5.8.3))
+      '@tg-search/common':
+        specifier: workspace:^
+        version: link:../common
       '@tg-search/core':
         specifier: workspace:^
         version: link:../core
