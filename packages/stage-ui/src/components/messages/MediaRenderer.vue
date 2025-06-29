@@ -30,7 +30,7 @@ async function processMedia() {
       const base64 = mediaItem.base64
       if (typeof base64 === 'string') {
         mediaSrc.value = base64.startsWith('data:') ? base64 : `data:image/jpeg;base64,${base64}`
-        mediaType.value = 'photo'
+        mediaType.value = mediaItem.type
         return
       }
 

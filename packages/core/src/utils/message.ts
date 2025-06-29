@@ -35,7 +35,7 @@ export type CoreMessageMediaTypes = 'photo' | 'sticker' | 'unknown'
 
 export interface CoreMessageMedia {
   type: CoreMessageMediaTypes
-  messageId: string
+  messageUUID?: UUID
   base64: string | undefined
   path?: string
   apiMedia?: unknown // Api.TypeMessageMedia
@@ -125,7 +125,6 @@ export function convertToCoreMessage(message: Api.Message): Result<CoreMessage> 
   const media: CoreMessageMedia[] = []
   if (message.media) {
     media.push({
-      messageId,
       type: parseMediaType(message.media),
       apiMedia: message.media,
       base64: undefined,

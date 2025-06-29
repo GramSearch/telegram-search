@@ -14,22 +14,28 @@ import { useLogger } from '@tg-search/common'
 import { getMediaPath, useConfig } from '@tg-search/common/node'
 import { Err, Ok } from '@tg-search/common/utils/monad'
 
-async function resolveMedia(data: string | Buffer<ArrayBufferLike> | undefined): Promise<Result<string | undefined>> {
+type UnhandledMediaType = string | Buffer | ArrayBuffer | { type: 'Buffer', data: any } | undefined
+type MediaBase64 = string
+
+async function resolveMedia(data: UnhandledMediaType): Promise<Result<MediaBase64 | undefined>> {
   try {
     if (!data)
       return Ok(undefined)
-
-    let buffer: Buffer
 
     if (typeof data === 'string') {
       return Ok(data)
     }
 
-    if (data && typeof data === 'object' && 'type' in data && data.type === 'Buffer' && 'data' in data) {
-      buffer = Buffer.from(data.data as ArrayBufferLike)
+    let buffer: Buffer
+
+    if (Buffer.isBuffer(data)) {
+      buffer = data
     }
     else if (data instanceof ArrayBuffer) {
       buffer = Buffer.from(data)
+    }
+    else if (typeof data === 'object' && data !== null && 'type' in data && (data as any).type === 'Buffer' && 'data' in data) {
+      buffer = Buffer.from((data as any).data)
     }
     else {
       throw new TypeError('Unsupported media format')
@@ -89,7 +95,7 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
                 apiMedia: media.apiMedia,
                 base64: (await resolveMedia(mediaFetched)).orUndefined(),
                 type: media.type,
-                messageId: media.messageId,
+                messageUUID: media.messageUUID,
                 path: mediaPath,
               } satisfies CoreMessageMedia
             }),
