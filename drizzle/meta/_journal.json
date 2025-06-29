@@ -71,6 +71,13 @@
       "when": 1751219553487,
       "tag": "0009_married_terrax",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1751221642514,
+      "tag": "0010_friendly_cable",
+      "breakpoints": true
     }
   ]
 }

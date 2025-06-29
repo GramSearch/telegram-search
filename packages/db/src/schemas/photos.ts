@@ -18,7 +18,6 @@ export const photosTable = pgTable('photos', {
   file_id: text().notNull().default(''),
   message_id: uuid(),
   image_bytes: bytea(),
-  image_base64: text().notNull().default(''),
   image_path: text().notNull().default(''),
   caption: text().notNull().default(''),
   description: text().notNull().default(''),

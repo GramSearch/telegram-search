@@ -92,7 +92,7 @@ export async function fetchMessagesWithPhotos(chatId: string, pagination: CorePa
 
   // Fetch photos for all messages in batch
   const messageIds = dbMessagesResults.map(msg => msg.id)
-  const photos = (await findPhotosByMessageIds(messageIds))?.unwrap()
+  const photos = (await findPhotosByMessageIds(messageIds)).unwrap()
 
   // Group photos by message_id
   const photosByMessage = Object.groupBy(
