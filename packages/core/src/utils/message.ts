@@ -1,4 +1,3 @@
-import type { Buffer } from 'node:buffer'
 import type { UUID } from 'node:crypto'
 
 import type { Result } from '@tg-search/common/utils/monad'
@@ -11,7 +10,7 @@ import { Api } from 'telegram'
 export interface CoreMessage {
   uuid: UUID
 
-  platform: string // Telegram
+  platform: 'telegram'
   platformMessageId: string
   chatId: string
 
@@ -32,9 +31,23 @@ export interface CoreMessage {
   deletedAt?: number
 }
 
+export type CoreMessageMediaTypes = 'photo' | 'sticker' | 'unknown'
+
 export interface CoreMessageMedia {
-  apiMedia: unknown // Api.TypeMessageMedia
-  data: string | Buffer<ArrayBufferLike> | undefined
+  type: CoreMessageMediaTypes
+  messageId: string
+  base64: string | undefined
+  path?: string
+  apiMedia?: unknown // Api.TypeMessageMedia
+}
+
+export function parseMediaType(apiMedia: Api.TypeMessageMedia): CoreMessageMediaTypes {
+  switch (true) {
+    case apiMedia instanceof Api.MessageMediaPhoto:
+      return 'photo'
+    default:
+      return 'unknown'
+  }
 }
 
 export interface CoreMessageReply {
@@ -112,8 +125,10 @@ export function convertToCoreMessage(message: Api.Message): Result<CoreMessage> 
   const media: CoreMessageMedia[] = []
   if (message.media) {
     media.push({
+      messageId,
+      type: parseMediaType(message.media),
       apiMedia: message.media,
-      data: undefined,
+      base64: undefined,
     })
   }
 

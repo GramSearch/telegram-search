@@ -1,8 +1,9 @@
+import type { Result } from '@tg-search/common/utils/monad'
 import type { Api } from 'telegram'
 
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
-import type { CoreMessage } from '../utils/message'
+import type { CoreMessage, CoreMessageMedia } from '../utils/message'
 
 import { Buffer } from 'node:buffer'
 import { existsSync, mkdirSync } from 'node:fs'
@@ -11,7 +12,35 @@ import { join } from 'node:path'
 
 import { useLogger } from '@tg-search/common'
 import { getMediaPath, useConfig } from '@tg-search/common/node'
-import { Ok } from '@tg-search/common/utils/monad'
+import { Err, Ok } from '@tg-search/common/utils/monad'
+
+async function resolveMedia(data: string | Buffer<ArrayBufferLike> | undefined): Promise<Result<string | undefined>> {
+  try {
+    if (!data)
+      return Ok(undefined)
+
+    let buffer: Buffer
+
+    if (typeof data === 'string') {
+      return Ok(data)
+    }
+
+    if (data && typeof data === 'object' && 'type' in data && data.type === 'Buffer' && 'data' in data) {
+      buffer = Buffer.from(data.data as ArrayBufferLike)
+    }
+    else if (data instanceof ArrayBuffer) {
+      buffer = Buffer.from(data)
+    }
+    else {
+      throw new TypeError('Unsupported media format')
+    }
+
+    return Ok(buffer.toString('base64'))
+  }
+  catch (error) {
+    return Err(new Error('Error processing media', { cause: error }))
+  }
+}
 
 export function createMediaResolver(ctx: CoreContext): MessageResolver {
   const logger = useLogger('core:resolver:media')
@@ -58,8 +87,11 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
 
               return {
                 apiMedia: media.apiMedia,
-                data: mediaFetched,
-              }
+                base64: (await resolveMedia(mediaFetched)).orUndefined(),
+                type: media.type,
+                messageId: media.messageId,
+                path: mediaPath,
+              } satisfies CoreMessageMedia
             }),
           )
 
