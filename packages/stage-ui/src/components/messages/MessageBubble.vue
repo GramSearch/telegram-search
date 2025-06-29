@@ -28,8 +28,8 @@ const formattedTimestamp = computed(() => {
     <div class="flex-1">
       <div class="mb-1 flex items-center gap-2">
         <span class="whitespace-nowrap text-primary font-medium">{{ message.fromName }}</span>
-        <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ formattedTimestamp }}</span>
-        <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ message.platformMessageId }}</span>
+        <span class="whitespace-nowrap text-xs text-secondary-foreground">{{ formattedTimestamp }}</span>
+        <span class="whitespace-nowrap text-xs text-secondary-foreground">{{ message.platformMessageId }}</span>
       </div>
 
       <div class="text-foreground">

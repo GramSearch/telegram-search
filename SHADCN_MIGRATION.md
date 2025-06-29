@@ -57,12 +57,6 @@ npx shadcn-vue@latest add input
 ### Using the cn() Utility
 
 ```vue
-<template>
-  <div :class="cn('base-class', conditionalClass && 'conditional-class', className)">
-    Content
-  </div>
-</template>
-
 <script setup lang="ts">
 import { cn } from '@tg-search/stage-ui'
 
@@ -71,6 +65,12 @@ const props = defineProps<{
   conditionalClass?: boolean
 }>()
 </script>
+
+<template>
+  <div :class="cn('base-class', conditionalClass && 'conditional-class', className)">
+    Content
+  </div>
+</template>
 ```
 
 ### Theme Colors

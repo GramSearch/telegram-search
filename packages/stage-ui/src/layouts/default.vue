@@ -59,7 +59,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
 
 <template>
   <div
-    class="bg-background h-screen w-full flex overflow-hidden text-sm font-medium"
+    class="h-screen w-full flex overflow-hidden bg-background text-sm font-medium"
   >
     <!-- Login prompt banner -->
     <div
@@ -80,7 +80,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
       </div>
     </div>
 
-    <div class="border-r-secondary w-[20%] flex flex-col border-r h-dvh md:w-[15%]">
+    <div class="w-[20%] flex flex-col border-r border-r-secondary h-dvh md:w-[15%]">
       <div class="relative p-4">
         <div
           class="i-lucide-search absolute left-7 top-1/2 h-4 w-4 -translate-y-1/2"
@@ -88,7 +88,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         <input
           v-model="searchParams"
           type="text"
-          class="border-secondary bg-muted ring-offset-background focus:ring-ring placeholder:text-muted-foreground dark:bg-muted dark:border-secondary w-full border rounded-md px-3 py-2 pl-9 focus:outline-none focus:ring-2"
+          class="w-full border border-secondary rounded-md bg-muted px-3 py-2 pl-9 ring-offset-background dark:border-secondary dark:bg-muted placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           placeholder="Search"
         >
       </div>
@@ -119,7 +119,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         />
       </div>
 
-      <div class="border-t-secondary h-full flex flex-1 flex-col justify-start overflow-y-auto border-t pt-4">
+      <div class="h-full flex flex-1 flex-col justify-start overflow-y-auto border-t border-t-secondary pt-4">
         <ChatsCollapse
           class="max-h-[85%] flex flex-col"
           :class="{ 'flex-1': activeChatGroup === 'user' }"
@@ -156,27 +156,27 @@ function toggleActiveChatGroup(group: ChatGroup) {
 
       <div class="flex items-center justify-between p-4">
         <div class="mr-3 flex items-center gap-3">
-          <div class="bg-muted h-8 w-8 flex items-center justify-center overflow-hidden rounded-full">
+          <div class="h-8 w-8 flex items-center justify-center overflow-hidden rounded-full bg-muted">
             <Avatar
               :name="websocketStore.getActiveSession()?.me?.username"
               size="sm"
             />
           </div>
           <div class="flex flex-col">
-            <span class="text-foreground whitespace-nowrap text-sm font-medium">{{ websocketStore.getActiveSession()?.me?.username }}</span>
-            <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
+            <span class="whitespace-nowrap text-sm text-foreground font-medium">{{ websocketStore.getActiveSession()?.me?.username }}</span>
+            <span class="whitespace-nowrap text-xs text-secondary-foreground">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
           </div>
         </div>
         <div class="flex items-center">
           <Button
             :icon="isDark ? 'i-lucide-sun' : 'i-lucide-moon'"
-            class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
+            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
             @click="() => { isDark = !isDark }"
           />
 
           <Button
             icon="i-lucide-settings"
-            class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
+            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
             @click="toggleSettingsDialog"
           />
         </div>

@@ -49,15 +49,15 @@ watch(keywordDebounced, (newKeyword) => {
 
 <template>
   <div v-if="isOpen" class="flex items-center justify-center" @keydown.esc="isOpen = false">
-    <div class="bg-card w-[45%] rounded-xl shadow-lg">
+    <div class="w-[45%] rounded-xl bg-card shadow-lg">
       <!-- 搜索输入框 -->
       <div class="flex items-center gap-2 border-b px-4 py-3">
         <input
           v-model="keyword"
-          class="text-foreground w-full outline-none"
+          class="w-full text-foreground outline-none"
         >
         <button
-          class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
+          class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-foreground hover:bg-muted"
           @click="showSettings = !showSettings"
         >
           <span class="i-lucide-chevron-down h-4 w-4 transition-transform" :class="{ 'rotate-180': showSettings }" />
@@ -79,13 +79,13 @@ watch(keywordDebounced, (newKeyword) => {
           <MessageList :messages="searchResult" :keyword="keyword" />
         </template>
         <template v-else-if="isLoading">
-          <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+          <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
             <span class="i-lucide-loader-circle mb-2 animate-spin text-3xl" />
             <span>搜索中...</span>
           </div>
         </template>
         <template v-else-if="searchResult.length === 0">
-          <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+          <div class="flex flex-col items-center justify-center py-12 text-muted-foreground opacity-70">
             <span class="i-lucide-search mb-2 text-3xl" />
             <span>没有找到相关消息</span>
           </div>
