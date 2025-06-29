@@ -37,8 +37,8 @@ export function registerStorageEventHandlers(ctx: CoreContext) {
   emitter.on('storage:fetch:dialogs', async () => {
     logger.verbose('Fetching dialogs')
 
-    const dbChats = await fetchChats()
-    const chatsMessageStats = await getChatMessagesStats()
+    const dbChats = (await fetchChats())?.unwrap()
+    const chatsMessageStats = (await getChatMessagesStats())?.unwrap()
 
     logger.withFields({ dbChatsSize: dbChats.length, chatsMessageStatsSize: chatsMessageStats.length }).verbose('Chat message stats')
 
