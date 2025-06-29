@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import type { CoreMessage } from '@tg-search/core/types'
 
+import { computed } from 'vue'
+
 import Avatar from '../ui/Avatar.vue'
 import MediaRenderer from './MediaRenderer.vue'
 
-defineProps<{
+const props = defineProps<{
   message: CoreMessage
 }>()
+
+const formattedTimestamp = computed(() => {
+  if (!props.message.platformTimestamp)
+    return ''
+  return new Date(props.message.platformTimestamp).toLocaleString()
+})
 </script>
 
 <template>
@@ -20,7 +28,7 @@ defineProps<{
     <div class="flex-1">
       <div class="mb-1 flex items-center gap-2">
         <span class="whitespace-nowrap text-primary font-medium">{{ message.fromName }}</span>
-        <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ new Date(message.platformTimestamp).toLocaleString() }}</span>
+        <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ formattedTimestamp }}</span>
         <span class="text-secondary-foreground whitespace-nowrap text-xs">{{ message.platformMessageId }}</span>
       </div>
 
