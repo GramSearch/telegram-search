@@ -39,7 +39,7 @@ export interface CoreMessageMedia {
   messageUUID?: UUID
   base64: string | undefined
   path?: string
-  byte?: Buffer<ArrayBufferLike> | undefined
+  byte?: Buffer | undefined
   apiMedia?: unknown // Api.TypeMessageMedia
 }
 
