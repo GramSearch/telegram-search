@@ -3,6 +3,7 @@ import type { UUID } from 'node:crypto'
 import type { CoreMessageMedia } from '../../../../core/src'
 import type { photosTable } from '../../schemas/photos'
 
+export type DBInsertPhoto = typeof photosTable.$inferInsert
 export type DBSelectPhoto = typeof photosTable.$inferSelect
 
 export function convertDBPhotoToCoreMessageMedia(dbPhoto: DBSelectPhoto): CoreMessageMedia {

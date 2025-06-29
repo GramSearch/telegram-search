@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer'
 import type { UUID } from 'node:crypto'
 
 import type { Result } from '@tg-search/common/utils/monad'
@@ -38,6 +39,7 @@ export interface CoreMessageMedia {
   messageUUID?: UUID
   base64: string | undefined
   path?: string
+  byte?: Buffer<ArrayBufferLike> | undefined
   apiMedia?: unknown // Api.TypeMessageMedia
 }
 

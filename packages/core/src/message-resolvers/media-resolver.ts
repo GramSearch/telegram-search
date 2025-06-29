@@ -91,9 +91,12 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
                 void writeFile(mediaPath, mediaFetched)
               }
 
+              const byte = mediaFetched instanceof Buffer ? mediaFetched : undefined
+
               return {
                 apiMedia: media.apiMedia,
                 base64: (await resolveMedia(mediaFetched)).orUndefined(),
+                byte,
                 type: media.type,
                 messageUUID: media.messageUUID,
                 path: mediaPath,
