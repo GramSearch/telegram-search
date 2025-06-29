@@ -37,12 +37,21 @@ importers:
       bumpp:
         specifier: ^10.2.0
         version: 10.2.0
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       drizzle-kit:
         specifier: ^0.31.4
         version: 0.31.4
       eslint:
         specifier: ^9.30.0
         version: 9.30.0(jiti@2.4.2)
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.3.1
       taze:
         specifier: ^19.1.0
         version: 19.1.0
@@ -55,6 +64,12 @@ importers:
       unocss:
         specifier: ^66.3.2
         version: 66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      unocss-preset-animations:
+        specifier: ^1.2.1
+        version: 1.2.1(@unocss/preset-wind3@66.3.2)(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
+      unocss-preset-shadcn:
+        specifier: ^0.5.0
+        version: 0.5.0(unocss-preset-animations@1.2.1(@unocss/preset-wind3@66.3.2)(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))))(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
       unplugin-unused:
         specifier: ^0.5.1
         version: 0.5.1
@@ -3146,6 +3161,9 @@ packages:
   citty@0.1.6:
     resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
 
+  class-variance-authority@0.7.1:
+    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
+
   clean-regexp@1.0.0:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
     engines: {node: '>=4'}
@@ -3180,6 +3198,10 @@ packages:
   clone@1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -5772,6 +5794,9 @@ packages:
     resolution: {integrity: sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==}
     engines: {node: '>=18'}
 
+  tailwind-merge@3.3.1:
+    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
+
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -5849,6 +5874,7 @@ packages:
   token-types@6.0.1:
     resolution: {integrity: sha512-jK12SoPQ9D33HTOIQaOhc5tN4Vr+hlbiP/GSPviCyo8/7xgPG5j4AYvl7Zd4k8RhL55eT/IUhBGl7fL06w3mrQ==}
     engines: {node: '>=14.16'}
+    deprecated: Polluted dependency tree
 
   toml-eslint-parser@0.10.0:
     resolution: {integrity: sha512-khrZo4buq4qVmsGzS5yQjKe/WsFvV8fGfOjDQN0q4iy9FjRfPWRgTFrU8u1R2iu/SfWLhY9WnCi4Jhdrcbtg+g==}
@@ -5973,6 +5999,21 @@ packages:
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
+
+  unocss-preset-animations@1.2.1:
+    resolution: {integrity: sha512-HFdYPSLZ8SaAgTLfTNoiV5+1xAdcttOtFSPsZyHbA0qSis7Sansf90pz7a2yhs9Yq6Nos9P4onDttfdO8dwKPA==}
+    peerDependencies:
+      '@unocss/preset-wind3': '>=0.56.0 < 101'
+      unocss: '>=0.56.0 < 101'
+    peerDependenciesMeta:
+      '@unocss/preset-wind3':
+        optional: true
+
+  unocss-preset-shadcn@0.5.0:
+    resolution: {integrity: sha512-e/bF/+b5adcolHio3kst3WVF+f09+BiDkyTshUVqcWXB0RabQ0T8lzqfM3KAegTTi1iJo1jjCZoE88cUzaVDmQ==}
+    peerDependencies:
+      unocss: '>=0.56.0 < 101'
+      unocss-preset-animations: ^1.1.1
 
   unocss@66.3.2:
     resolution: {integrity: sha512-u5FPNsjI2Ah1wGtpmteVxWe6Bja9Oggg25IeAatJCoDd1LxtLm0iHr+I0RlSq0ZwewMWzx/Qlmrw7jU0ZMO+0Q==}
@@ -9307,6 +9348,10 @@ snapshots:
     dependencies:
       consola: 3.4.2
 
+  class-variance-authority@0.7.1:
+    dependencies:
+      clsx: 2.1.1
+
   clean-regexp@1.0.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -9342,6 +9387,8 @@ snapshots:
       mimic-response: 1.0.1
 
   clone@1.0.4: {}
+
+  clsx@2.1.1: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -12287,6 +12334,8 @@ snapshots:
 
   system-architecture@0.1.0: {}
 
+  tailwind-merge@3.3.1: {}
+
   tapable@2.2.1: {}
 
   tar-fs@2.1.2:
@@ -12522,6 +12571,17 @@ snapshots:
   universalify@0.1.2: {}
 
   universalify@2.0.1: {}
+
+  unocss-preset-animations@1.2.1(@unocss/preset-wind3@66.3.2)(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))):
+    dependencies:
+      unocss: 66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+    optionalDependencies:
+      '@unocss/preset-wind3': 66.3.2
+
+  unocss-preset-shadcn@0.5.0(unocss-preset-animations@1.2.1(@unocss/preset-wind3@66.3.2)(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))))(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))):
+    dependencies:
+      unocss: 66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      unocss-preset-animations: 1.2.1(@unocss/preset-wind3@66.3.2)(unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
 
   unocss@66.3.2(postcss@8.5.6)(rolldown-vite@7.0.3(@types/node@24.0.7)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)):
     dependencies:

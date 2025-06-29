@@ -1,23 +1,19 @@
-import { presetChromatic } from '@proj-airi/unocss-preset-chromatic'
 import {
   defineConfig,
   mergeConfigs,
   presetAttributify,
   presetIcons,
   presetWebFonts,
-  presetWind3,
+  presetWind,
 } from 'unocss'
+import presetAnimations from 'unocss-preset-animations'
+import { presetShadcn } from 'unocss-preset-shadcn'
 
 export function sharedUnoConfig() {
   return defineConfig({
     shortcuts: [
-      ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
-      ['icon-btn', 'text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600 !outline-none'],
-      ['animate-fade-in', 'animate-fade-in'],
-      ['animate-spin', 'animate-spin'],
-      ['animate-pulse', 'animate-pulse'],
-      ['scale-102', 'transform scale-102'],
-      ['scale-98', 'transform scale-98'],
+      // Keep some useful existing shortcuts
+      ['icon-btn', 'text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-primary !outline-none'],
       // Grid list transitions
       ['grid-list-move', 'transition-all duration-300 ease-in-out'],
       ['grid-list-enter-active', 'transition-all duration-300 ease-in-out'],
@@ -31,7 +27,7 @@ export function sharedUnoConfig() {
       ['fade-leave-to', 'opacity-0 scale-80'],
     ],
     presets: [
-      presetWind3(),
+      presetWind(),
       presetAttributify(),
       presetIcons(),
       presetWebFonts({
@@ -40,43 +36,24 @@ export function sharedUnoConfig() {
           sans: 'Roboto',
         },
       }),
-      presetChromatic({
-        baseHue: 220.44,
-        colors: {
-          primary: 0,
-          complementary: 180,
-        },
+      presetAnimations(),
+      presetShadcn({
+        color: 'blue',
       }),
     ],
-    theme: {
-      animation: {
-        keyframes: {
-          'fade-in': '{from{opacity:0}to{opacity:1}}',
-          'spin': '{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}',
-          'pulse': '{0%,100%{opacity:1}50%{opacity:0.7}}',
-        },
-        durations: {
-          'fade-in': '0.5s',
-          'spin': '1.5s',
-          'pulse': '2s',
-        },
-        timingFns: {
-          'fade-in': 'ease-in-out',
-          'spin': 'linear',
-          'pulse': 'cubic-bezier(0.4,0,0.6,1)',
-        },
-        counts: {
-          spin: 'infinite',
-          pulse: 'infinite',
-        },
+    // Content extraction configuration for shadcn-vue
+    content: {
+      pipeline: {
+        include: [
+          // The default patterns
+          /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+          // Include js/ts files for shadcn components
+          '(components|src|packages)/**/*.{js,ts}',
+        ],
       },
     },
     safelist: [
-      'animate-fade-in',
-      'animate-spin',
-      'animate-pulse',
-      'scale-102',
-      'scale-98',
+      // Keep existing useful safelisted classes
       'grid-list-move',
       'grid-list-enter-active',
       'grid-list-leave-active',
