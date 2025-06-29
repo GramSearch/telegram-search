@@ -1,14 +1,14 @@
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center">
     <div class="animate-bounce">
-      <div class="text-foreground text-8xl">
+      <div class="text-primary-900 text-8xl">
         <i class="i-lucide-circle-alert" />
       </div>
-      <h1 class="text-foreground text-6xl font-bold">
+      <h1 class="text-primary-900 text-6xl font-bold">
         404
       </h1>
     </div>
-    <p class="text-secondary-foreground mt-4 animate-fade-in text-xl">
+    <p class="text-complementary-600 mt-4 animate-fade-in text-xl">
       Page not found
     </p>
     <RouterLink

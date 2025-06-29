@@ -47,7 +47,7 @@ watch(keywordDebounced, (newKeyword) => {
 
 <template>
   <div class="h-full flex flex-col">
-    <header class="border-b-secondary dark:border-b-secondary flex items-center border-b p-4 px-4">
+    <header class="border-b-neutral-200 dark:border-b-neutral-200 flex items-center border-b p-4 px-4">
       <div class="flex items-center gap-2">
         <span class="text-lg font-medium">Search</span>
       </div>
@@ -58,11 +58,11 @@ watch(keywordDebounced, (newKeyword) => {
       <div class="w-full flex items-center gap-2">
         <input
           v-model="keyword"
-          class="border-secondary text-foreground flex-1 border rounded-md px-4 py-2 outline-none"
+          class="border-neutral-200 text-primary-900 flex-1 border rounded-md px-4 py-2 outline-none"
           placeholder="Search messages..."
         >
         <button
-          class="text-foreground hover:bg-muted h-8 w-8 flex items-center justify-center rounded-md p-1"
+          class="text-primary-900 hover:bg-neutral-100 h-8 w-8 flex items-center justify-center rounded-md p-1"
           @click="showSettings = !showSettings"
         >
           <span class="i-lucide-chevron-down h-4 w-4 transition-transform" :class="{ 'rotate-180': showSettings }" />
@@ -85,13 +85,13 @@ watch(keywordDebounced, (newKeyword) => {
         <MessageList :messages="searchResult" :keyword="keyword" />
       </template>
       <template v-else-if="isLoading">
-        <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+        <div class="text-complementary-500 flex flex-col items-center justify-center py-12 opacity-70">
           <span class="i-lucide-loader-circle mb-2 animate-spin text-3xl" />
           <span>搜索中...</span>
         </div>
       </template>
       <template v-else-if="searchResult.length === 0">
-        <div class="text-muted-foreground flex flex-col items-center justify-center py-12 opacity-70">
+        <div class="text-complementary-500 flex flex-col items-center justify-center py-12 opacity-70">
           <span class="i-lucide-search mb-2 text-3xl" />
           <span>没有找到相关消息</span>
         </div>

@@ -17,7 +17,7 @@ defineProps<{
           class="h-12 w-12 flex items-center justify-center border-2 rounded-full text-xl font-bold transition"
           :class="{
             'bg-primary text-white border-primary shadow-lg': currentStep === step.value,
-            'bg-muted text-muted-foreground border-muted': steps.findIndex(s => s.value === currentStep) !== idx,
+            'bg-neutral-100 text-complementary-500 border-muted': steps.findIndex(s => s.value === currentStep) !== idx,
           }"
         >
           <span>{{ idx + 1 }}</span>

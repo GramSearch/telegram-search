@@ -95,7 +95,7 @@ onMounted(() => {
   <!-- Loading state -->
   <div v-if="isLoading" class="flex items-center gap-2">
     <div class="i-lucide-loader-circle h-4 w-4 animate-spin" />
-    <span class="text-secondary-foreground text-xs">处理媒体中...</span>
+    <span class="text-complementary-600 text-xs">处理媒体中...</span>
   </div>
 
   <!-- Error state -->

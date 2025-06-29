@@ -24,7 +24,7 @@ const iconSizeClasses = {
 
 <template>
   <button
-    class="hover:bg-muted flex flex-row items-center justify-center gap-2 rounded-lg p-2"
+    class="hover:bg-neutral-100 flex flex-row items-center justify-center gap-2 rounded-lg p-2"
     :class="[
       sizeClasses[size ?? 'md'],
       disabled ? 'cursor-not-allowed opacity-50' : '',
@@ -38,7 +38,7 @@ const iconSizeClasses = {
       :class="[
         iconSizeClasses[size ?? 'md'],
         props.icon,
-        darkModeText ? 'text-foreground' : '',
+        darkModeText ? 'text-primary-900' : '',
         withTransition ? 'transition-colors duration-300' : '',
       ]"
     />

@@ -158,7 +158,7 @@ const isGlobalSearchOpen = ref(false)
         <template #settings>
           <div class="flex items-center">
             <input id="searchContent" type="checkbox" class="border-border mr-1 rounded">
-            <label for="searchContent" class="text-foreground text-sm">搜索内容</label>
+            <label for="searchContent" class="text-primary-900 text-sm">搜索内容</label>
           </div>
         </template>
       </SearchDialog>

@@ -41,14 +41,14 @@ const userId = computed(() => activeSessionComputed.value?.me?.id)
         size="md"
       />
       <div class="flex flex-col">
-        <span class="text-foreground text-sm font-medium">{{ username }}</span>
-        <span class="text-secondary-foreground text-xs">ID: {{ userId }}</span>
+        <span class="text-primary-900 text-sm font-medium">{{ username }}</span>
+        <span class="text-complementary-600 text-xs">ID: {{ userId }}</span>
       </div>
     </div>
 
     <div class="mt-2">
       <button
-        class="text-foreground hover:bg-muted w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm"
+        class="text-primary-900 hover:bg-neutral-100 w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm"
         @click="handleLoginLogout"
       >
         <div :class="isLoggedIn ? 'i-lucide-log-out' : 'i-lucide-log-in'" class="h-4 w-4" />
