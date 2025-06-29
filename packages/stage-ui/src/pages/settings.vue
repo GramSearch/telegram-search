@@ -60,7 +60,7 @@ onMounted(() => {
     <!-- Settings form -->
     <div class="space-y-6">
       <!-- Database settings -->
-      <div class="bg-card border border-neutral-200 rounded-lg p-4">
+      <div class="border border-neutral-200 rounded-lg bg-card p-4">
         <h2 class="mb-4 text-xl text-primary-900 font-semibold">
           Database Settings
         </h2>
@@ -114,7 +114,7 @@ onMounted(() => {
       </div>
 
       <!-- Message settings -->
-      <div class="bg-card border border-neutral-200 rounded-lg p-4">
+      <div class="border border-neutral-200 rounded-lg bg-card p-4">
         <h2 class="mb-4 text-xl text-primary-900 font-semibold">
           Message Settings
         </h2>
@@ -167,7 +167,7 @@ onMounted(() => {
       </div>
 
       <!-- Path settings -->
-      <div class="bg-card border border-neutral-200 rounded-lg p-4">
+      <div class="border border-neutral-200 rounded-lg bg-card p-4">
         <h2 class="mb-4 text-xl text-primary-900 font-semibold">
           Path Settings
         </h2>
@@ -185,7 +185,7 @@ onMounted(() => {
       </div>
 
       <!-- API settings -->
-      <div class="bg-card border border-neutral-200 rounded-lg p-4">
+      <div class="border border-neutral-200 rounded-lg bg-card p-4">
         <h2 class="mb-4 text-xl text-primary-900 font-semibold">
           API Settings
         </h2>
