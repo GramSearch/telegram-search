@@ -16,7 +16,7 @@ const isCurrentPage = computed(() => route.path === props.path)
 <template>
   <div
     :class="{ 'bg-neutral-100 dark:bg-neutral-100': isCurrentPage }"
-    class="hover:bg-neutral-100 dark:hover:bg-neutral-100 px-4 transition-colors"
+    class="px-4 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-100"
     @click="router.push(props.path)"
   >
     <div

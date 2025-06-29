@@ -88,7 +88,7 @@ function toggleActiveChatGroup(group: ChatGroup) {
         <input
           v-model="searchParams"
           type="text"
-          class="border-neutral-200 bg-neutral-100 ring-offset-background focus:ring-primary placeholder:text-complementary-500 dark:bg-neutral-800 dark:border-neutral-700 w-full border rounded-md px-3 py-2 pl-9 focus:outline-none focus:ring-2"
+          class="ring-offset-background w-full border border-neutral-200 rounded-md bg-neutral-100 px-3 py-2 pl-9 dark:border-neutral-700 dark:bg-neutral-800 placeholder:text-complementary-500 focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="Search"
         >
       </div>
@@ -156,27 +156,27 @@ function toggleActiveChatGroup(group: ChatGroup) {
 
       <div class="flex items-center justify-between p-4">
         <div class="mr-3 flex items-center gap-3">
-          <div class="bg-neutral-100 h-8 w-8 flex items-center justify-center overflow-hidden rounded-full">
+          <div class="h-8 w-8 flex items-center justify-center overflow-hidden rounded-full bg-neutral-100">
             <Avatar
               :name="websocketStore.getActiveSession()?.me?.username"
               size="sm"
             />
           </div>
           <div class="flex flex-col">
-            <span class="text-primary-900 whitespace-nowrap text-sm font-medium">{{ websocketStore.getActiveSession()?.me?.username }}</span>
-            <span class="text-complementary-600 whitespace-nowrap text-xs">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
+            <span class="whitespace-nowrap text-sm text-primary-900 font-medium">{{ websocketStore.getActiveSession()?.me?.username }}</span>
+            <span class="whitespace-nowrap text-xs text-complementary-600">{{ websocketStore.getActiveSession()?.isConnected ? '已链接' : '未链接' }}</span>
           </div>
         </div>
         <div class="flex items-center">
           <Button
             :icon="isDark ? 'i-lucide-sun' : 'i-lucide-moon'"
-            class="text-primary-900 hover:bg-neutral-100 h-8 w-8 flex items-center justify-center rounded-md p-1"
+            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-primary-900 hover:bg-neutral-100"
             @click="() => { isDark = !isDark }"
           />
 
           <Button
             icon="i-lucide-settings"
-            class="text-primary-900 hover:bg-neutral-100 h-8 w-8 flex items-center justify-center rounded-md p-1"
+            class="h-8 w-8 flex items-center justify-center rounded-md p-1 text-primary-900 hover:bg-neutral-100"
             @click="toggleSettingsDialog"
           />
         </div>

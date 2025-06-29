@@ -67,7 +67,7 @@
 presetChromatic({
   baseHue: 220.44,
   colors: {
-    primary: 0,        // 主色相（蓝色系）
+    primary: 0, // 主色相（蓝色系）
     complementary: 180, // 互补色相（橙色系）
   },
 })

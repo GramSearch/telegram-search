@@ -18,7 +18,7 @@ const formattedTimestamp = computed(() => {
 </script>
 
 <template>
-      <div class="hover:bg-neutral-100 flex items-start gap-4 rounded-lg p-3 transition-all duration-200">
+  <div class="flex items-start gap-4 rounded-lg p-3 transition-all duration-200 hover:bg-neutral-100">
     <div class="mt-1">
       <Avatar
         :name="message.fromName"
@@ -28,8 +28,8 @@ const formattedTimestamp = computed(() => {
     <div class="flex-1">
       <div class="mb-1 flex items-center gap-2">
         <span class="whitespace-nowrap text-primary font-medium">{{ message.fromName }}</span>
-        <span class="text-complementary-600 whitespace-nowrap text-xs">{{ formattedTimestamp }}</span>
-        <span class="text-complementary-600 whitespace-nowrap text-xs">{{ message.platformMessageId }}</span>
+        <span class="whitespace-nowrap text-xs text-complementary-600">{{ formattedTimestamp }}</span>
+        <span class="whitespace-nowrap text-xs text-complementary-600">{{ message.platformMessageId }}</span>
       </div>
 
       <div class="text-primary-900">

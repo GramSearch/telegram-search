@@ -88,7 +88,7 @@ watch(currentTaskProgress, (progress) => {
 
   <div class="p-6">
     <div class="flex items-center justify-between">
-      <h3 class="text-primary-900 text-lg font-medium">
+      <h3 class="text-lg text-primary-900 font-medium">
         选择要同步的聊天
       </h3>
       <div class="flex items-center gap-2">
@@ -98,7 +98,7 @@ watch(currentTaskProgress, (progress) => {
             label="增量同步"
           />
         </div>
-        <span class="text-complementary-600 text-sm">
+        <span class="text-sm text-complementary-600">
           已选择 {{ selectedChats.length }} 个聊天
         </span>
       </div>

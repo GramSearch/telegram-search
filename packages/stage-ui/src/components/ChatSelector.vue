@@ -107,7 +107,7 @@ watch([selectedType, searchQuery], () => {
         <input
           v-model="searchQuery"
           type="text"
-          class="bg-neutral-100 border-neutral-200 w-full border rounded-md px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
+          class="w-full border border-neutral-200 rounded-md bg-neutral-100 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary"
           placeholder="Search"
         >
       </div>
@@ -133,7 +133,7 @@ watch([selectedType, searchQuery], () => {
                 <div class="i-lucide-circle-check h-4 w-4" />
               </span>
             </p>
-            <p class="text-complementary-600 truncate text-sm">
+            <p class="truncate text-sm text-complementary-600">
               {{ chat.subtitle }}
             </p>
           </div>
@@ -150,7 +150,7 @@ watch([selectedType, searchQuery], () => {
     />
 
     <!-- No Results Message -->
-    <div v-if="filteredChats.length === 0" class="text-complementary-600 py-8 text-center">
+    <div v-if="filteredChats.length === 0" class="py-8 text-center text-complementary-600">
       No chats found
     </div>
   </div>
