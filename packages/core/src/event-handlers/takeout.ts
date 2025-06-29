@@ -22,7 +22,7 @@ export function registerTakeoutEventHandlers(ctx: CoreContext) {
       // Increase export
       const increaseOptions: { chatId: string, firstMessageId: number, latestMessageId: number }[] = await Promise.all(
         chatIds.map(async (chatId) => {
-          const stats = await getChatMessageStatsByChatId(chatId)
+          const stats = (await getChatMessageStatsByChatId(chatId))?.unwrap()
           return {
             chatId,
             firstMessageId: stats.first_message_id ?? 0, // Forward increase

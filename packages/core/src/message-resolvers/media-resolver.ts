@@ -1,8 +1,9 @@
+import type { Result } from '@tg-search/common/utils/monad'
 import type { Api } from 'telegram'
 
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
-import type { CoreMessage } from '../utils/message'
+import type { CoreMessage, CoreMessageMedia } from '../utils/message'
 
 import { Buffer } from 'node:buffer'
 import { existsSync, mkdirSync } from 'node:fs'
@@ -11,7 +12,41 @@ import { join } from 'node:path'
 
 import { useLogger } from '@tg-search/common'
 import { getMediaPath, useConfig } from '@tg-search/common/node'
-import { Ok } from '@tg-search/common/utils/monad'
+import { Err, Ok } from '@tg-search/common/utils/monad'
+
+type UnhandledMediaType = string | Buffer | ArrayBuffer | { type: 'Buffer', data: any } | undefined
+type MediaBase64 = string
+
+async function resolveMedia(data: UnhandledMediaType): Promise<Result<MediaBase64 | undefined>> {
+  try {
+    if (!data)
+      return Ok(undefined)
+
+    if (typeof data === 'string') {
+      return Ok(data)
+    }
+
+    let buffer: Buffer
+
+    if (Buffer.isBuffer(data)) {
+      buffer = data
+    }
+    else if (data instanceof ArrayBuffer) {
+      buffer = Buffer.from(data)
+    }
+    else if (typeof data === 'object' && data !== null && 'type' in data && (data as any).type === 'Buffer' && 'data' in data) {
+      buffer = Buffer.from((data as any).data)
+    }
+    else {
+      throw new TypeError('Unsupported media format')
+    }
+
+    return Ok(buffer.toString('base64'))
+  }
+  catch (error) {
+    return Err(new Error('Error processing media', { cause: error }))
+  }
+}
 
 export function createMediaResolver(ctx: CoreContext): MessageResolver {
   const logger = useLogger('core:resolver:media')
@@ -56,10 +91,16 @@ export function createMediaResolver(ctx: CoreContext): MessageResolver {
                 void writeFile(mediaPath, mediaFetched)
               }
 
+              const byte = mediaFetched instanceof Buffer ? mediaFetched : undefined
+
               return {
                 apiMedia: media.apiMedia,
-                data: mediaFetched,
-              }
+                base64: (await resolveMedia(mediaFetched)).orUndefined(),
+                byte,
+                type: media.type,
+                messageUUID: media.messageUUID,
+                path: mediaPath,
+              } satisfies CoreMessageMedia
             }),
           )
 

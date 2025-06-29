@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import type { CoreMessage } from '@tg-search/core/types'
+import type { CoreMessage, CoreMessageMediaTypes } from '@tg-search/core/types'
 
-// eslint-disable-next-line unicorn/prefer-node-protocol
-import { Buffer } from 'buffer'
-
-import { fileTypeFromBuffer } from 'file-type'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
@@ -16,7 +12,7 @@ const isMedia = computed(() => {
 })
 
 const mediaSrc = ref<string | null>(null)
-const mediaType = ref<'image' | 'video' | 'audio' | 'document' | null>(null)
+const mediaType = ref<CoreMessageMediaTypes>('unknown')
 const isLoading = computed(() => {
   return mediaSrc.value === null && isMedia.value
 })
@@ -28,50 +24,17 @@ async function processMedia() {
       return
 
     for (const mediaItem of props.message.media!) {
-      if (!mediaItem.data)
+      if (!mediaItem.base64)
         continue
 
-      const media = mediaItem.data
-      let buffer: Buffer
-
-      if (typeof media === 'string') {
-        mediaSrc.value = media.startsWith('data:') ? media : `data:image/jpeg;base64,${media}`
-        mediaType.value = 'image'
+      const base64 = mediaItem.base64
+      if (typeof base64 === 'string') {
+        mediaSrc.value = base64.startsWith('data:') ? base64 : `data:image/jpeg;base64,${base64}`
+        mediaType.value = mediaItem.type
         return
       }
 
-      if (media && typeof media === 'object' && 'type' in media && media.type === 'Buffer' && 'data' in media) {
-        buffer = Buffer.from(media.data as ArrayBufferLike)
-      }
-      else if (media instanceof ArrayBuffer) {
-        buffer = Buffer.from(media)
-      }
-      else {
-        throw new TypeError('Unsupported media format')
-      }
-
-      // Detect file type
-      const fileType = await fileTypeFromBuffer(buffer)
-      const mimeType = fileType?.mime || 'application/octet-stream'
-      const base64 = buffer.toString('base64')
-
-      mediaSrc.value = `data:${mimeType};base64,${base64}`
-
-      // Determine media category
-      if (mimeType.startsWith('image/')) {
-        mediaType.value = 'image'
-      }
-      else if (mimeType.startsWith('video/')) {
-        mediaType.value = 'video'
-      }
-      else if (mimeType.startsWith('audio/')) {
-        mediaType.value = 'audio'
-      }
-      else {
-        mediaType.value = 'document'
-      }
-
-      // Process first valid media item only
+      // TODO: Process first valid media item only
       break
     }
   }
@@ -108,36 +71,14 @@ onMounted(() => {
   <div v-else-if="mediaSrc">
     <!-- Images -->
     <img
-      v-if="mediaType === 'image'"
+      v-if="mediaType === 'photo'"
       :src="mediaSrc"
       class="h-auto max-w-full max-w-xs rounded-lg"
       alt="Media content"
       @error="error = 'Image failed to load'"
     >
 
-    <!-- Videos -->
-    <video
-      v-else-if="mediaType === 'video'"
-      :src="mediaSrc"
-      class="h-auto max-w-full rounded-lg"
-      controls
-      @error="error = 'Video failed to load'"
-    >
-      Your browser does not support the video tag.
-    </video>
-
-    <!-- Audio -->
-    <audio
-      v-else-if="mediaType === 'audio'"
-      :src="mediaSrc"
-      class="w-full"
-      controls
-      @error="error = 'Audio failed to load'"
-    >
-      Your browser does not support the audio tag.
-    </audio>
-
-    <!-- Documents/Others -->
+    <!-- Others -->
     <div
       v-else
       class="flex items-center gap-2 rounded bg-gray-100 p-3 dark:bg-gray-800"

@@ -1,43 +1,48 @@
 // https://github.com/moeru-ai/airi/blob/main/services/telegram-bot/src/models/photos.ts
 
-import { Ok } from '@tg-search/common/utils/monad'
+import type { CoreMessageMedia } from '../../../core/src'
+import type { DBInsertPhoto } from './utils/photos'
+
 import { eq, inArray } from 'drizzle-orm'
 
 import { withDb } from '../drizzle'
 import { photosTable } from '../schemas/photos'
 
-export async function findPhotoDescription(fileId: string) {
-  const photo = (await withDb(db => db
-    .select()
-    .from(photosTable)
-    .where(eq(photosTable.file_id, fileId))
-    .limit(1),
-  )).expect('Failed to find photo description')
-
-  if (photo.length === 0) {
-    return ''
+export async function recordPhotos(media: CoreMessageMedia[]) {
+  if (media.length === 0) {
+    return
   }
 
-  return photo[0].description
-}
-
-export async function recordPhoto(photoBase64: string, fileId: string, filePath: string, description: string) {
-  (await withDb(async db => Ok(await db
-    .insert(photosTable)
-    .values({
+  const dataToInsert = media.map(
+    media => ({
       platform: 'telegram',
-      file_id: fileId,
-      image_base64: photoBase64,
-      image_path: filePath,
-      description,
-    })),
-  )).expect('Failed to record photo')
+      file_id: '',
+      message_id: media.messageUUID,
+      image_bytes: media.byte,
+      image_path: media.path,
+      description: '',
+    } satisfies DBInsertPhoto),
+  )
+
+  return withDb(async db => db
+    .insert(photosTable)
+    .values(dataToInsert)
+    .returning(),
+  )
 }
 
-export async function findPhotosDescriptions(fileIds: string[]) {
-  return (await withDb(db => db
+export async function findPhotosByMessageId(messageUUID: string) {
+  return withDb(db => db
     .select()
     .from(photosTable)
-    .where(inArray(photosTable.file_id, fileIds)),
-  )).expect('Failed to find photos descriptions')
+    .where(eq(photosTable.message_id, messageUUID)),
+  )
+}
+
+export async function findPhotosByMessageIds(messageUUIDs: string[]) {
+  return withDb(db => db
+    .select()
+    .from(photosTable)
+    .where(inArray(photosTable.message_id, messageUUIDs)),
+  )
 }
