@@ -1,16 +1,14 @@
 import type { NodeOptions } from 'crossws/adapters/node'
 
 import process from 'node:process'
+
 import { flags, initLogger, parseEnvFlags, useLogger } from '@tg-search/common'
-import { initConfig } from '@tg-search/common/composable'
-import { initDrizzle } from '@tg-search/core'
+import { initConfig } from '@tg-search/common/node'
+import { initDrizzle } from '@tg-search/db'
 import { createApp, toNodeListener } from 'h3'
 import { listen } from 'listhen'
 
 import { setupWsRoutes } from './app'
-
-export type * from './app'
-export type * from './ws-event'
 
 async function initCore(): Promise<ReturnType<typeof useLogger>> {
   parseEnvFlags(process.env as Record<string, string>)

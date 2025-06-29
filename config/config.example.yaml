@@ -6,7 +6,7 @@ database:
   # Can use URL or separate field configuration
   # url: postgres://postgres:postgres@localhost:5432/tg_search
   host: localhost
-  port: 5433
+  port: 5432
   user: postgres
   password: '123456'
   database: postgres

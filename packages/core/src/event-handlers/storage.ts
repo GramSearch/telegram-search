@@ -1,13 +1,11 @@
+import type { DBRetrievalMessages } from '@tg-search/db'
+
 import type { CoreContext } from '../context'
-import type { DBRetrievalMessages } from '../models/utils/message'
 import type { CoreDialog } from '../services'
 
 import { useLogger } from '@tg-search/common'
+import { convertToCoreRetrievalMessages, fetchChats, fetchMessages, getChatMessagesStats, recordChats, recordMessages, retrieveMessages } from '@tg-search/db'
 
-import { fetchMessages, recordMessages, retrieveMessages } from '../models/chat-message'
-import { getChatMessagesStats } from '../models/chat-message-stats'
-import { fetchChats, recordChats } from '../models/chats'
-import { convertToCoreRetrievalMessages } from '../models/utils/message'
 import { embedContents } from '../utils/embed'
 
 export function registerStorageEventHandlers(ctx: CoreContext) {
@@ -22,14 +20,16 @@ export function registerStorageEventHandlers(ctx: CoreContext) {
 
   emitter.on('storage:record:messages', async ({ messages }) => {
     logger.withFields({ messages: messages.length }).verbose('Recording messages')
-    logger.withFields(messages.map(m => ({
-      ...m,
-      vectors: {
-        vector1536: m.vectors.vector1536?.length,
-        vector1024: m.vectors.vector1024?.length,
-        vector768: m.vectors.vector768?.length,
-      },
-    })),
+    logger.withFields(
+      messages
+        .map(m => ({
+          ...m,
+          vectors: {
+            vector1536: m.vectors.vector1536?.length,
+            vector1024: m.vectors.vector1024?.length,
+            vector768: m.vectors.vector768?.length,
+          },
+        })),
     ).debug('Recording messages')
     await recordMessages(messages)
   })

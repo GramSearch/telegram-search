@@ -1,10 +1,10 @@
+import type { Result } from '@tg-search/common/utils/monad'
 import type { Entity } from 'telegram/define'
+
 import type { CoreEntity } from '../services/entity'
-import type { Result } from './monad'
 
+import { Err, Ok } from '@tg-search/common/utils/monad'
 import { Api } from 'telegram'
-
-import { Err, Ok } from './monad'
 
 export function resolveEntity(entity: Entity): Result<CoreEntity> {
   if (entity instanceof Api.User) {

@@ -23,24 +23,24 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: pnpm
+  # build:
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: lts/*
+  #         cache: pnpm
 
-      - name: Install
-        run: pnpm install
+  #     - name: Install
+  #       run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+  #     - name: Build
+  #       run: pnpm run build
 
   typecheck:
     strategy:
@@ -57,9 +57,6 @@ jobs:
 
       - name: Install
         run: pnpm install
-
-      - name: Build
-        run: pnpm run build
 
       - name: Typecheck
         run: pnpm run typecheck

@@ -2,8 +2,9 @@ import type { CoreContext } from '../context'
 import type { MessageService } from '../services'
 
 import { useLogger } from '@tg-search/common'
-import { useConfig } from '@tg-search/common/composable'
 import { Api } from 'telegram/tl'
+
+import { useConfig } from '../../../common/src/node'
 
 export function registerMessageEventHandlers(ctx: CoreContext) {
   const { emitter } = ctx

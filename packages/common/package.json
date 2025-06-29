@@ -1,26 +1,14 @@
 {
   "name": "@tg-search/common",
   "type": "module",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.14",
   "private": true,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
-    },
-    "./composable": {
-      "types": "./dist/composable/index.d.ts",
-      "import": "./dist/composable/index.mjs"
-    }
+    ".": "./src/index.ts",
+    "./node": "./src/node/index.ts",
+    "./utils/*": "./src/utils/*.ts"
   },
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "unbuild",
-    "stub": "unbuild --stub",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

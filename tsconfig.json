@@ -7,6 +7,8 @@
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
   "exclude": [

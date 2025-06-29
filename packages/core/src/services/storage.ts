@@ -1,5 +1,6 @@
+import type { CorePagination } from '@tg-search/common/utils/pagination'
+
 import type { CoreMessage } from '../utils/message'
-import type { CorePagination } from '../utils/pagination'
 import type { CoreDialog } from './dialog'
 
 export interface CoreMessageSearchParams {

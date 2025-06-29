@@ -3,8 +3,11 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - airi
+  - Attributify
   - bumpp
   - crossws
+  - culori
   - defu
   - Elysia
   - elysiajs
@@ -18,7 +21,9 @@ words:
   - Logg
   - lucide
   - luoling
+  - moeru
   - ofetch
+  - oklch
   - ollama
   - onnotice
   - pathe
@@ -27,16 +32,20 @@ words:
   - pinia
   - reka
   - Retriable
+  - rolldown
   - sonner
   - taze
   - tiktoken
   - trpc
+  - tsdown
   - tsquery
   - tsvector
   - unocss
   - unplugin
   - uuidv4
   - valibot
+  - vectorlite
+  - vite
   - vitest
   - vueuse
   - xsai

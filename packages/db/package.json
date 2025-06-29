@@ -1,0 +1,23 @@
+{
+  "name": "@tg-search/db",
+  "type": "module",
+  "version": "1.0.0-beta.14",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.3",
+    "@node-rs/jieba": "^2.0.1",
+    "@tg-search/common": "workspace:*",
+    "drizzle-orm": "^0.44.2",
+    "pg": "^8.16.2",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.4"
+  }
+}

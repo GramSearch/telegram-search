@@ -1,12 +1,13 @@
 import type { Api } from 'telegram'
+
 import type { CoreContext } from '../context'
 import type { TakeoutService } from '../services'
 
 import { useLogger } from '@tg-search/common'
-import { useConfig } from '@tg-search/common/composable'
+import { usePagination } from '@tg-search/common/utils/pagination'
+import { getChatMessageStatsByChatId } from '@tg-search/db'
 
-import { getChatMessageStatsByChatId } from '../models/chat-message-stats'
-import { usePagination } from '../utils/pagination'
+import { useConfig } from '../../../common/src/node'
 
 export function registerTakeoutEventHandlers(ctx: CoreContext) {
   const { emitter } = ctx

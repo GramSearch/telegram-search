@@ -1,5 +1,6 @@
+import type { Result } from '@tg-search/common/utils/monad'
+
 import type { CoreMessage } from '../utils/message'
-import type { Result } from '../utils/monad'
 
 import { useLogger } from '@tg-search/common'
 

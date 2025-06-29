@@ -2,9 +2,9 @@ import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreMessage } from '../utils/message'
 
 import { EmbeddingDimension, useLogger } from '@tg-search/common'
+import { Err, Ok } from '@tg-search/common/utils/monad'
 
 import { embedContents } from '../utils/embed'
-import { Err, Ok } from '../utils/monad'
 
 export function createEmbeddingResolver(): MessageResolver {
   const logger = useLogger('core:resolver:embedding')

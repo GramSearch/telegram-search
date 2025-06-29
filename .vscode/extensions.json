@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "EditorConfig.EditorConfig",
+    "usernamehw.errorlens",
+    "dbaeumer.vscode-eslint",
+    "antfu.goto-alias",
+    "lokalise.i18n-ally",
+    "antfu.iconify",
+    "yzhang.markdown-all-in-one",
+    "antfu.unocss",
+    "Vue.volar",
+    "vitest.explorer",
+    "redhat.vscode-yaml",
+    "rust-lang.rust-analyzer"
+  ]
+}

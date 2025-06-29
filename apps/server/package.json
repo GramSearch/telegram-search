@@ -1,32 +1,26 @@
 {
   "name": "@tg-search/server",
   "type": "module",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.14",
   "exports": {
     ".": "./src/index.ts",
-    "./package.json": "./package.json"
+    "./types": "./src/types.ts"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "serve": "vite-node src/index.ts",
     "dev": "vite-node src/index.ts",
-    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tg-search/common": "workspace:*",
     "@tg-search/core": "workspace:*",
-    "crossws": "^0.3.5",
-    "es-toolkit": "^1.38.0",
+    "@tg-search/db": "workspace:*",
+    "crossws": "0.3.5",
+    "es-toolkit": "^1.39.4",
     "h3": "^1.15.3",
     "listhen": "^1.9.0",
-    "tsx": "^4.19.4",
-    "vite-node": "^3.1.4",
+    "tsx": "^4.20.3",
+    "vite-node": "^3.2.4",
     "web-streams-polyfill": "^4.1.0"
   }
 }

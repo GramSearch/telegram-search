@@ -2,11 +2,12 @@ import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreMessage } from '../utils/message'
 
 import { existsSync, readFileSync } from 'node:fs'
+
 import { Jieba } from '@node-rs/jieba'
 import { useLogger } from '@tg-search/common'
-import { useConfig } from '@tg-search/common/composable'
+import { Err, Ok } from '@tg-search/common/utils/monad'
 
-import { Err, Ok } from '../utils/monad'
+import { useConfig } from '../../../common/src/node'
 
 let jieba: Jieba | undefined
 

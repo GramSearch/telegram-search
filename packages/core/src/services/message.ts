@@ -1,13 +1,14 @@
+import type { CorePagination } from '@tg-search/common/utils/pagination'
+
 import type { CoreContext } from '../context'
 import type { MessageResolverRegistryFn } from '../message-resolvers'
 import type { CoreMessage } from '../utils/message'
-import type { CorePagination } from '../utils/pagination'
 
 import { useLogger } from '@tg-search/common'
+import { Err, Ok } from '@tg-search/common/utils/monad'
 import { Api } from 'telegram'
 
 import { convertToCoreMessage } from '../utils/message'
-import { Err, Ok } from '../utils/monad'
 
 export interface MessageEventToCore {
   'message:fetch': (data: { chatId: string, pagination: CorePagination }) => void
@@ -64,18 +65,29 @@ export function createMessageService(ctx: CoreContext) {
 
       // Embedding or resolve messages
       let emitMessages: CoreMessage[] = coreMessages
+      const reEmitMessages: CoreMessage[] = []
       for (const [name, resolver] of resolvers.registry.entries()) {
         logger.withFields({ name }).verbose('Process messages with resolver')
 
         try {
           const result = (await resolver.run({ messages: emitMessages })).unwrap()
-          // logger.withFields({ result }).debug('Processed messages result')
-          emitMessages = result.length > 0 ? result : emitMessages
-          // logger.withFields({ emitMessages }).debug('Processed messages')
+
+          if (result.length > 0) {
+            emitMessages = result
+
+            if (name === 'media') {
+              reEmitMessages.push(...result.filter(message => message.media?.length && message.media.length > 0))
+            }
+          }
         }
         catch (error) {
           logger.withFields({ error }).warn('Failed to process messages')
         }
+      }
+
+      if (reEmitMessages.length > 0) {
+        logger.withFields({ count: reEmitMessages.length }).verbose('Re-emit messages with media')
+        emitter.emit('message:data', { messages: reEmitMessages })
       }
 
       emitter.emit('storage:record:messages', { messages: emitMessages })

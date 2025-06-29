@@ -1,11 +1,12 @@
 import type { Entity } from 'telegram/define'
+
 import type { MessageResolver, MessageResolverOpts } from '.'
 import type { CoreContext } from '../context'
 
 import { useLogger } from '@tg-search/common'
+import { Ok } from '@tg-search/common/utils/monad'
 
 import { resolveEntity } from '../utils/entity'
-import { Ok } from '../utils/monad'
 
 export function createUserResolver(ctx: CoreContext): MessageResolver {
   const logger = useLogger('core:resolver:user')
